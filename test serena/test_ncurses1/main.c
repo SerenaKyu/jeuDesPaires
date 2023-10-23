@@ -5,7 +5,7 @@
 int main() {
 
     initscr() ; //activation mode cursive
-    barre(10) ; // print hello world en mode cursif
+    barre(100) ; // print hello world en mode cursif
     refresh() ; 
     getch() ; // attents input user
     endwin(); // finit programme
