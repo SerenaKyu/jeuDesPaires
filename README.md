@@ -44,9 +44,9 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 
 > **Légende :**
 >
-> :white_check_mark: = Fait et implémenter dans code principale
-> :eight_pointed_black_star: = Codé mais non implémenter dans cette version
-> :x: = Pas encore fait
+> - :white_check_mark: = Fait et implémenter dans code principale
+> - :eight_pointed_black_star: = Codé mais non implémenter dans cette version
+> - :x: = Pas encore fait
 
 |Fonctionnalité            |Status                    |Version |
 |--------------------------|--------------------------|--------|
