@@ -40,7 +40,7 @@ gcc -o a.out ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o -lncurses
 
 Voici notre avancement actuelle sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v0.1*
+*Version actuelle du jeu : v0.1.1*
 
 > **Légende :**
 >
@@ -70,7 +70,10 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 
 - ### PatchNotes :bookmark_tabs:
 
-*Version actuelle du jeu : v0.1*
+*Version actuelle du jeu : v0.1.1*
+
+- ##### v0.1.1 :
+> - Résolution d'un probléme de compilation avec le makefile
 
 - ###### v0.1 :
 > - Mise en place arborescence fichier
