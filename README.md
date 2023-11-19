@@ -72,7 +72,7 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 
 *Version actuelle du jeu : v0.1.1*
 
-- ##### v0.1.1 :
+- ###### v0.1.1 :
 > - Résolution d'un probléme de compilation avec le makefile
 
 - ###### v0.1 :
