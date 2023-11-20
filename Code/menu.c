@@ -36,7 +36,7 @@ void affiche_option(WINDOW * myWindow) { //permet d'afficher les options disponi
 
 void erreur10(int rows, int cols) { //affichage de l'erreur et arret de la fenetre
                                     //Erreur 10 = fenetre trop petite
-                 
+
     endwin() ;               
     fprintf(stderr, "Erreur 10 : Le terminal est trop petit\n\n"); 
     fprintf(stderr, "Ce dernier dois minimum respecter la tailles suivantes :\n");

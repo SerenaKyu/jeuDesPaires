@@ -2,8 +2,11 @@
 
 #include <ncurses.h> // stdio.h est inclue dans ncurses.h
 #include <stdlib.h>
-#include "menu.h" //permets de gerer l'affichage de l'ecran titre et des différentes
+
+#include "menu.h" //Permets de gerer l'affichage de l'ecran titre et des différentes
                  // erreures
+
+#include "game.h"//Permets de gerer le jeu
 
 #define TAILLE_T 50
 
@@ -33,7 +36,7 @@ int main(int argc , char ** argv) {
         return 0 ;          //supplémentaire comme la taille du terminal
     }
 
-    box(menuBox, 0 ,0) ; //affiche la boite
+    box(menuBox,0,0) ; //affiche la boite
     wrefresh(menuBox) ; 
 
     affiche_titre(menuBox) ; //affiche le titre + option de l'écran d'acceuille
@@ -46,16 +49,18 @@ int main(int argc , char ** argv) {
     switch (userGamemodeChoice[0]) //permet de decider le mode choisie par l'utilisateur
     {
     case '1': //Mode 1 joueur
-        mvwprintw(menuBox,17,4,"tu as presse 1") ;
+        wclear(menuBox) ; //eneleve l'affichage de l'ecran titre
+        wrefresh(menuBox) ; //refresh aprés l'avoir enlever pour pouvoir la mettre a jour
+
+        game_1player() ; //Debut du jeu à 1 joueur
         break;
     case '2' : //Autoplay
-        mvwprintw(menuBox,17,4,"tu as presse 2") ;
+        mvwprintw(menuBox,17,4,"Mode AutoPlay") ;
         break ; 
     default: //Affichage de l'erreur d'entrée utilisateur (erreur 11)
         erreur11() ;
         return 0 ;
     }
-    wrefresh(menuBox) ; 
 
     getch(); //recuperer l'input pour finir le programme main
     endwin() ; //fin de du processus ncruses 
