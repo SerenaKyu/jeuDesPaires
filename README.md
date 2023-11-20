@@ -40,7 +40,7 @@ gcc -o a.out ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o -lncurses
 
 Voici notre avancement actuelle sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v0.1.1*
+*Version actuelle du jeu : v0.2*
 
 > **Légende :**
 >
@@ -53,29 +53,35 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 |Ecran Titre               |:white_check_mark:        |**v0.1**|
 |Séléction du mode de jeu  |:white_check_mark:        |**v0.1**|
 |Test résolution Terminal  |:white_check_mark:        |**v0.1**|
-|Lancement jeu 1 joueur    |:x:                       |        |
+|Lancement jeu 1 joueur    |:white_check_mark:        |**V0.2**|
 |Lancement jeu Autoplay    |:x:                       |        |
 |Motif déco cartes         |:x:                       |        |
-|Défini Aléatoire cartes   |:x:                       |        |
+|Défini Aléatoire cartes   |:eight_pointed_black_star:|        |
 |Gestion des inputs jeu    |:eight_pointed_black_star:|        |
 |Choix de la carte jeu     |:eight_pointed_black_star:|        |
-|Chronomètre               |:eight_pointed_black_star:|        |
+|Chronomètre               |:white_check_mark:        |**V0.2**|
 |Comparaison des cartes    |:x:                       |        |
-|Couleur des cartes status |:x:                       |        |
+|Couleur des cartes status |:eight_pointed_black_star:|        |
 |Ecriture highscore        |:x:                       |        |
-|Highscores stockage       |:x:                       |        |
-|Temps écoulée             |:x:                       |        |
+|Highscores stockage       |:eight_pointed_black_star:|        |
+|Temps écoulée             |:white_check_mark:        |**V0.2**|
 |Decision auto play        |:x:                       |        |
 |SiteWeb                   |:x:                       |        |
 
 - ### PatchNotes :bookmark_tabs:
 
-*Version actuelle du jeu : v0.1.1*
+*Version actuelle du jeu : v0.2*
+
+- ##### v0.2 :
+> - Implémentation des features suivantes :
+>   - Lancement du jeu à 1 joueur
+>   - Chronometre
+>   - Stop programme quand temps écoulée 
 
 - ###### v0.1.1 :
 > - Résolution d'un probléme de compilation avec le makefile
 
-- ###### v0.1 :
+- ##### v0.1 :
 > - Mise en place arborescence fichier
 > - Ecriture du ```README.md```
 > - Implémentation des features suivantes : 

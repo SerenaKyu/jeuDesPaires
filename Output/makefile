@@ -1,5 +1,5 @@
-a.out : ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o
-	gcc -o a.out ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o -lncurses
+a.out : ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o ../Code/ObjectFile/game.o
+	gcc -o a.out ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o ../Code/ObjectFile/game.o -lncurses
 
 ../Code/ObjectFile/main.o : ../Code/main.c
 	gcc -c -Wall ../Code/main.c -o ../Code/ObjectFile/main.o
@@ -7,5 +7,8 @@ a.out : ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o
 ../Code/ObjectFile/menu.o : ../Code/menu.c
 	gcc -c -Wall ../Code/menu.c -o ../Code/ObjectFile/menu.o
 
+../Code/ObjectFile/game.o : ../Code/game.c
+	gcc -c -Wall ../Code/game.c -o ../Code/ObjectFile/game.o
+
 clean :
-	rm -f prog ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o a.out
+	rm -f prog ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o ../Code/ObjectFile/game.o a.out
