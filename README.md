@@ -53,18 +53,18 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 |Ecran Titre               |:white_check_mark:        |**v0.1**|
 |Séléction du mode de jeu  |:white_check_mark:        |**v0.1**|
 |Test résolution Terminal  |:white_check_mark:        |**v0.1**|
-|Lancement jeu 1 joueur    |:white_check_mark:        |**V0.2**|
+|Lancement jeu 1 joueur    |:white_check_mark:        |**v0.2**|
 |Lancement jeu Autoplay    |:x:                       |        |
 |Motif déco cartes         |:x:                       |        |
 |Défini Aléatoire cartes   |:eight_pointed_black_star:|        |
 |Gestion des inputs jeu    |:eight_pointed_black_star:|        |
 |Choix de la carte jeu     |:eight_pointed_black_star:|        |
-|Chronomètre               |:white_check_mark:        |**V0.2**|
+|Chronomètre               |:white_check_mark:        |**v0.2**|
 |Comparaison des cartes    |:x:                       |        |
 |Couleur des cartes status |:eight_pointed_black_star:|        |
 |Ecriture highscore        |:x:                       |        |
 |Highscores stockage       |:eight_pointed_black_star:|        |
-|Temps écoulée             |:white_check_mark:        |**V0.2**|
+|Temps écoulée             |:white_check_mark:        |**v0.2**|
 |Decision auto play        |:x:                       |        |
 |SiteWeb                   |:x:                       |        |
 
