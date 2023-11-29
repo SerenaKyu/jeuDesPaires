@@ -30,7 +30,7 @@ Le programme est seulement disponible sur n'importe quel distribution **Linux.:p
 ```
 cd jeuDesPaires/Output
 
-gcc -o a.out ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o -lncurses
+gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c -lncurses
 
 ./a.out
 ```
@@ -40,7 +40,7 @@ gcc -o a.out ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o -lncurses
 
 Voici notre avancement actuelle sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v0.2*
+*Version actuelle du jeu : v0.2.1*
 
 > **Légende :**
 >
@@ -70,7 +70,14 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 
 - ### PatchNotes :bookmark_tabs:
 
-*Version actuelle du jeu : v0.2*
+*Version actuelle du jeu : v0.2.1*
+
+- ###### v0.2.1 :
+> - Correction de la commande a rentrée dans le terminal pour compiler.
+> - Réecriture du code de la features timer avec les paramétres suivants
+>   - Utilisation de la librairie "time.h" au lieu de ncurses pour une meilleur gestion du temps
+>   - Implementation direct dans la fonction de jeu pour l'utiliser en même temps que le jeu 
+>   - mise en place du nodelay et timeout pour la gestion des inupts du jeu
 
 - ##### v0.2 :
 > - Implémentation des features suivantes :

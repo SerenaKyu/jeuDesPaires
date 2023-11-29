@@ -3,6 +3,5 @@
 
 void game_1player() ;
 void affiche_tipTool(WINDOW *myWindow) ;
-void timer(WINDOw *myWindow) ;
 
 #endif
