@@ -24,9 +24,8 @@ int main(int argc , char ** argv) {
 
     WINDOW *menuBox = newwin(height,width,start_y,start_x) ; //definition de la taille de la fenetre 
 
-    nodelay(stdscr,TRUE);
-
-    getmaxyx(stdscr, rows, cols);
+    nodelay(stdscr,TRUE); //enleve le delay de refresh de la window
+    getmaxyx(stdscr, rows, cols); //recupere la taille du terminal
 
     refresh() ;
 
