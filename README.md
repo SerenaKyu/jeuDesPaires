@@ -1,6 +1,6 @@
 # Jeu des paires :black_joker:
 
-- ### Le but du jeu :video_game: 
+- ### Le but du jeu :black_flag: 
 
  Le jeu des paires est un jeu de carte ou le but est de trouver le plus rapidement des ensembles de cartes identiques, soyer le plus rapide à trouver toute les paires afin de pouvoir marquer le meilleur score possible ! 
 
@@ -36,16 +36,22 @@ gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c -lncurses
 ```
 > *il est quand meme préférable de passer par le makefile présent dans le dossier Output* 
 
+- ### Commandes de l'interface du jeu :video_game:
+
+- ##### Liste des commandes utilisateur possible dans le programme :
+
+    - **Echap** = fin de tâche de jeu *(outil de debug)*.
+
 - ### ToDo list :memo::white_check_mark:
 
 Voici notre avancement actuelle sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v0.2.1*
+*Version actuelle du jeu : v0.3*
 
 > **Légende :**
 >
-> - :white_check_mark: = Fait et implémenter dans code principale
-> - :eight_pointed_black_star: = Codé mais non implémenter dans cette version
+> - :white_check_mark: = Fait et implémenté dans code principale
+> - :eight_pointed_black_star: = Codé mais non implémenté dans cette version
 > - :x: = Pas encore fait
 
 |Fonctionnalité            |Status                    |Version |
@@ -57,20 +63,31 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 |Lancement jeu Autoplay    |:x:                       |        |
 |Motif déco cartes         |:x:                       |        |
 |Défini Aléatoire cartes   |:eight_pointed_black_star:|        |
-|Gestion des inputs jeu    |:eight_pointed_black_star:|        |
+|Gestion des inputs jeu    |:white_check_mark:        |**v0.3**|
 |Choix de la carte jeu     |:eight_pointed_black_star:|        |
 |Chronomètre               |:white_check_mark:        |**v0.2**|
-|Comparaison des cartes    |:x:                       |        |
+|Comparaison des cartes    |:eight_pointed_black_star:|        |
 |Couleur des cartes status |:eight_pointed_black_star:|        |
-|Ecriture highscore        |:x:                       |        |
+|Ecriture highscore        |:eight_pointed_black_star:|        |
 |Highscores stockage       |:eight_pointed_black_star:|        |
 |Temps écoulée             |:white_check_mark:        |**v0.2**|
-|Decision auto play        |:x:                       |        |
+|Décision auto play        |:x:                       |        |
 |SiteWeb                   |:x:                       |        |
 
 - ### PatchNotes :bookmark_tabs:
 
-*Version actuelle du jeu : v0.2.1*
+*Version actuelle du jeu : v0.3*
+
+- ##### v0.3 :
+> - Implémentation des features suivantes :
+>   - Détection des inputs utilisateur
+>   - Rendre le curser invisible pendant le jeu
+>   - Outil de debug suivants :
+>       -   Savoir la dernière input user
+>       -   Quitter rapidement le programme avec la touche *Echap*
+
+
+
 
 - ###### v0.2.1 :
 > - Correction de la commande a rentrée dans le terminal pour compiler.
