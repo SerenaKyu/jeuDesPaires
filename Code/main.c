@@ -5,7 +5,6 @@
 
 #include "menu.h" //Permets de gerer l'affichage de l'ecran titre et des différentes
                  // erreures
-
 #include "game.h"//Permets de gerer le jeu
 
 #define TAILLE_T 50
@@ -24,6 +23,8 @@ int main(int argc , char ** argv) {
     char userGamemodeChoice[TAILLE_T]; //chaine de charactere qui permet de recup le choix de mode de l'utilisateur
 
     WINDOW *menuBox = newwin(height,width,start_y,start_x) ; //definition de la taille de la fenetre 
+
+    nodelay(stdscr,TRUE);
 
     getmaxyx(stdscr, rows, cols);
 
