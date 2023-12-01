@@ -46,7 +46,7 @@ gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c -lncurses
 
 Voici notre avancement actuelle sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v0.3*
+*Version actuelle du jeu : v0.3.1*
 
 > **Légende :**
 >
@@ -76,7 +76,12 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 
 - ### PatchNotes :bookmark_tabs:
 
-*Version actuelle du jeu : v0.3*
+*Version actuelle du jeu : v0.3.1*
+
+- ###### v0.3.1 :
+> - Optimisation général dans le code du jeu :
+>   - Calcul du timer du jeu déplacé dans une fonction
+>   - Debug input déplacé dans une fonction
 
 - ##### v0.3 :
 > - Implémentation des features suivantes :
@@ -85,9 +90,6 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 >   - Outil de debug suivants :
 >       -   Savoir la dernière input user
 >       -   Quitter rapidement le programme avec la touche *Echap*
-
-
-
 
 - ###### v0.2.1 :
 > - Correction de la commande a rentrée dans le terminal pour compiler.
