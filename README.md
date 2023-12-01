@@ -91,9 +91,6 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 >       -   Savoir la dernière input user
 >       -   Quitter rapidement le programme avec la touche *Echap*
 
-
-
-
 - ###### v0.2.1 :
 > - Correction de la commande a rentrée dans le terminal pour compiler.
 > - Réecriture du code de la features timer avec les paramétres suivants
