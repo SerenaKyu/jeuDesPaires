@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #define NOMBRE_LIGNE_TITRE 7
-#define NOMBRE_OPTION 4
+#define NOMBRE_OPTION 5
 
 void affiche_titre(WINDOW * myWindow) { //permet d'afficher le titre
 
@@ -25,7 +25,7 @@ void affiche_option(WINDOW * myWindow) { //permet d'afficher les options disponi
 
     int ligne = NOMBRE_LIGNE_TITRE + 2 ; //permet d'initialiser la ligne de depart de l'affichage 
                                          //de chaque paramettre du tableau
-    const char *option[NOMBRE_OPTION] = {"Menu","1. 1 Joueur","2. Autoplayer","Entrer l'option de votre de choix :"} ;
+    const char *option[NOMBRE_OPTION] = {"Menu","1. 1 Joueur","2. Autoplayer","3. Mode debug","Entrer l'option de votre de choix :"} ;
 
     for(int i = 0 ; i < NOMBRE_OPTION ; i++) {
         mvwprintw(myWindow,ligne + i,4,"%s",option[i]) ;

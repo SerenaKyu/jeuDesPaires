@@ -1,6 +1,7 @@
 #include <ncurses.h>
 #include <stdlib.h>
 #include <sys/time.h> //librarie pour utiliser le chrono
+#include <stdbool.h>
 
 void affiche_tipTool(WINDOW *myWindow) { //affiche le toolTip du jeu(resume de ce qui faut faire)
     const char *texte[2] = {"Jeu des paires","Trouver les paires en un minimun de temps"} ;
@@ -34,7 +35,7 @@ int debug_input(int input, int lastInput,WINDOW *myWindow) {  //affiche l'input 
     return -1 ;
 }
 
-void game_1player() { //fonction du jeu à 1 joueur
+void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
 
     struct timeval start_time, current_time; //structure de temps en time.h
 
@@ -64,8 +65,10 @@ void game_1player() { //fonction du jeu à 1 joueur
 
         userInput = getch(); //récupere l'input utilisateur pour commander le jeu
 
-        lastInput = debug_input(userInput,lastInput,chronoBox) ;
-        mvwprintw(chronoBox,2,1,"Input : %c   ",lastInput) ; //affiche le dernier input
+        if(debugMode == true) {
+            lastInput = debug_input(userInput,lastInput,chronoBox) ;
+            mvwprintw(chronoBox,2,1,"Input : %c   ",lastInput) ; //affiche le dernier input
+        }
         
         if(userInput == 27) { //Quand echap press, termine le jeu (features debug)
             break;
