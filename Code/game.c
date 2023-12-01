@@ -35,12 +35,37 @@ int debug_input(int input, int lastInput,WINDOW *myWindow) {  //affiche l'input 
     return -1 ;
 }
 
+void after_game(bool victory, int secondsTime){
+    WINDOW *afterGameBox = newwin(8,100,22,0); //Fenetre de victoire
+    int userInput ;
+
+    box(afterGameBox,0,0) ;
+    
+    if (victory == true) {
+        mvwprintw(afterGameBox,1,1,"VICTOIRE") ;
+    }
+
+    else {
+        mvwprintw(afterGameBox,1,1,"DEFAITE") ;
+    }
+        wrefresh(afterGameBox) ;
+    while (1)
+    {
+
+        userInput = getch() ;
+        if(userInput == 27) { //Quand echap press, termine le jeu (features debug)
+            break;
+        }
+    }
+}
+
 void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
 
     struct timeval start_time, current_time; //structure de temps en time.h
 
     int userInput,lastInput  = 0; //variable pour les inputs joueur
     int inGameTime ; //temps passé dans le jeu, il recupérer dans la fonction de calcul de temps.
+    bool victory = true ;
 
     WINDOW *tipToolBox = newwin(4,70,0,0) ; //Fenetre du toolTip du jeu
     WINDOW *chronoBox = newwin(4,29,0,71) ; //Fenetre du chrono du jeu
@@ -75,4 +100,5 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
         }
 
     } while (inGameTime < 120 ); //temps du chrono (dans la version final, on sera a 120s)
+    after_game(victory,inGameTime) ;
 }
