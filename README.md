@@ -81,6 +81,7 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 - ##### v0.4 :
 > - Implémentation des features suivantes :
 >   - Ecrans de victoire aprés la fin du jeu.
+>   - Ecriture et lecture des highscores
 >   - Jeu en Mode débug (accéssible avec *3* dans le menu)
 > - Réecriture du code de la features timer avec les paramétres suivants
 >   - Calcul des secondes et millisecondes via une structure annexe 
