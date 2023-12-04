@@ -21,10 +21,13 @@ struct timeFormat SecondsAndMilliseconds(int time) { //mise a format du temps vi
 
 
 
+
+
+
 void stringUpper ( char *string ) { //permet de convertire un string en majuscule
     while( *string ){ 
-        *string=toupper( *string );
-        string++;
+        *string=toupper( *string ); 
+        string++; 
     }
 }
 
@@ -53,6 +56,12 @@ int affichage_temps(struct timeval start_time ,struct timeval current_time, WIND
 }
 
 
+struct score{ //structure de score 
+    char name[5];
+    float score;
+};
+
+
 
 int debug_input(int input, int lastInput,WINDOW *myWindow) {  //affiche l'input entree par l'utilisateur
     if (input !=  -1 || input != lastInput) { //affiche la derniere input entrer par l'utilisateur (features debug)
@@ -63,17 +72,74 @@ int debug_input(int input, int lastInput,WINDOW *myWindow) {  //affiche l'input 
 }
 
 void ecriture_score(int time, WINDOW *myWindow) {
+    FILE *highscore;
     char username[50] ; //variable qui vas stocker le nom
 
     struct timeFormat format = SecondsAndMilliseconds(time) ;
+    float userscore = format.seconds + (format.milliseconds)*0.1 ;
+
+    struct score scorelist[4];
+    struct score temp;
 
     curs_set(1) ; //reaffiche le curser
     echo() ; //réactive l'affichage des inputs entrée par l'utilisateur
 
     mvwgetstr(myWindow, 4, 62 , username) ; //recupere le choix de l'utilisateur
-    stringUpper(username) ; //mettre en majuscule le username
+    stringUpper(username) ; //mettre en majuscule le username    FILE *highscore;
 
-    mvwprintw(myWindow,6,1,"%.4s %d.%ds",username,format.seconds,format.milliseconds) ; //print le nom de l'utilisateur (debug)
+    highscore = fopen("../Data/jeuhighscore.txt", "r");
+
+    if(highscore == NULL){ // Vérifie si le fichier jeuhighscore.txt a bien été ouvert
+        printf("Erreur lors de l'ouverture du fichiers des scores");
+        exit(1);
+    }
+
+    scorelist[3].score=userscore; //mets le score du joeur dedans
+    strcpy(scorelist[3].name, username); //copie le nom du joueur
+
+    fscanf(highscore, "1 %4s %f\n", scorelist[0].name, &scorelist[0].score);
+    fscanf(highscore, "2 %4s %f\n", scorelist[1].name, &scorelist[1].score);
+    fscanf(highscore, "3 %4s %f\n", scorelist[2].name, &scorelist[2].score);
+
+    for(int i=3;i>0;i--){
+        if(scorelist[i].score<scorelist[i-1].score){
+            temp.score=scorelist[i-1].score;
+            strcpy(temp.name, scorelist[i-1].name);
+
+            scorelist[i-1].score=scorelist[i].score;
+            strcpy(scorelist[i-1].name,scorelist[i].name);
+
+            scorelist[i].score=temp.score;
+            strcpy(scorelist[i].name, temp.name);
+        }
+    }
+
+    fclose(highscore) ;
+    
+    highscore = fopen("../Data/jeuhighscore.txt", "w");
+
+    
+    if(highscore == NULL){ // Vérifie si le fichier jeuhighscore.txt a bien été ouvert
+        printf("Erreur lors de l'écriture du fichiers des scores");
+        exit(2);
+    } 
+    
+
+    for(int i=0;i<3;i++){
+        fprintf(highscore, "%d %4s %.1f\n", (i+1), scorelist[i].name, scorelist[i].score);
+    
+    }
+    werase(myWindow) ;
+    box(myWindow,0,0) ;
+    mvwprintw(myWindow,2,1,"Meilleurs temps :") ;
+    for(int i = 0 ; i < 3 ; i++) {
+        mvwprintw(myWindow,3+i,1,"%d %s %.1f",i+1,scorelist[i].name,scorelist[i].score) ;
+    }
+    noecho() ;
+
+
+    fclose(highscore);
+
 } 
 
 
@@ -94,6 +160,7 @@ void after_game(bool victory, int time){
         mvwprintw(afterGameBox,4,1,"Veilliez choisir un nom à 4 lettre pour conserver le score :") ;
         
         ecriture_score(time,afterGameBox) ;
+        mvwprintw(afterGameBox,1,1,"VICTOIRE") ; 
     }
 
     else { //si joueur perds
