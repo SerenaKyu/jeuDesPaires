@@ -1,7 +1,6 @@
-// gcc -o a.out main.c menu.c -lncurses
-
 #include <ncurses.h> // stdio.h est inclue dans ncurses.h
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "menu.h" //Permets de gerer l'affichage de l'ecran titre et des différentes
                  // erreures
@@ -43,7 +42,7 @@ int main(int argc , char ** argv) {
     affiche_option(menuBox) ;
     wrefresh(menuBox) ; //il faut refresh a chaque changement de valeur btw
 
-    mvwgetstr(menuBox, 15, 40 , userGamemodeChoice) ; //recupere le choix de l'utilisateur
+    mvwgetstr(menuBox, 17, 40 , userGamemodeChoice) ; //recupere le choix de l'utilisateur
     wrefresh(menuBox) ;
 
     switch (userGamemodeChoice[0]) //permet de decider le mode choisie par l'utilisateur
@@ -52,11 +51,17 @@ int main(int argc , char ** argv) {
         wclear(menuBox) ; //eneleve l'affichage de l'ecran titre
         wrefresh(menuBox) ; //refresh aprés l'avoir enlever pour pouvoir la mettre a jour
 
-        game_1player() ; //Debut du jeu à 1 joueur
+        game_1player(false) ; //Debut du jeu à 1 joueur
         break;
     case '2' : //Autoplay
         mvwprintw(menuBox,17,4,"Mode AutoPlay") ;
         break ; 
+    case '3'  :
+        wclear(menuBox) ; //eneleve l'affichage de l'ecran titre
+        wrefresh(menuBox) ; //refresh aprés l'avoir enlever pour pouvoir la mettre a jour
+
+        game_1player(true) ; //Debut du jeu à 1 joueur
+        break;
     default: //Affichage de l'erreur d'entrée utilisateur (erreur 11)
         erreur11() ;
         return 0 ;
