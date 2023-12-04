@@ -8,7 +8,7 @@ struct timeFormat { //structure du format du temps
     int milliseconds ;
 };
 
-struct timeFormat conMS(time) { //mise a format du temps via la structures préscédentes 
+struct timeFormat SecondsAndMilliseconds(int time) { //mise a format du temps via la structures précédentes 
    struct timeFormat format;
 
    format.seconds = time / 1000; //mise au format seconds
@@ -31,7 +31,7 @@ int affichage_temps(struct timeval start_time ,struct timeval current_time, WIND
     elapsed_time = (current_time.tv_sec - start_time.tv_sec) * 1000 + 
     (current_time.tv_usec - start_time.tv_usec) / 1000; //calculer le temps depuis le debut du timer et la fin
 
-    struct timeFormat format = conMS(elapsed_time) ; //appelle de la structure de format du temps
+    struct timeFormat format = SecondsAndMilliseconds(elapsed_time) ; //appelle de la structure de format du temps
 
     mvwprintw(myWindow,1,1,"Chrono  : %d.%ds", format.seconds,format.milliseconds); //affichage dans la fenetre du chrono
     wrefresh(myWindow) ; //refresh la fenetre pour afficher le temps du chrono actuel
@@ -55,7 +55,7 @@ void after_game(bool victory, int time){
     box(afterGameBox,0,0) ; //affiche les bordure dans 
     
     if (victory == true) { //si le joueur a gagner
-        struct timeFormat format = conMS(time) ; //appelle de la structure de format du temps
+        struct timeFormat format = SecondsAndMilliseconds(time) ; //appelle de la structure de format du temps
 
         mvwprintw(afterGameBox,1,1,"VICTOIRE") ; //affiche la victoire et le temps du joueur
         mvwprintw(afterGameBox,3,1,"Votre Temps : %d.%ds",format.seconds,format.milliseconds) ;
