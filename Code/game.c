@@ -17,6 +17,8 @@ struct timeFormat SecondsAndMilliseconds(int time) { //mise a format du temps vi
    return format; // retourne le format bien comme il faut
 }
 
+
+
 void affiche_tipTool(WINDOW *myWindow) { //affiche le toolTip du jeu(resume de ce qui faut faire)
     const char *texte[2] = {"Jeu des paires","Trouver les paires en un minimun de temps"} ;
     
@@ -24,6 +26,8 @@ void affiche_tipTool(WINDOW *myWindow) { //affiche le toolTip du jeu(resume de c
         mvwprintw(myWindow,1+i,1,"%s",texte[i]) ; //print dans la fenetre le tooltip
     }
 }
+
+
 
 int affichage_temps(struct timeval start_time ,struct timeval current_time, WINDOW * myWindow) {
     int elapsed_time = (current_time.tv_sec - start_time.tv_sec) * 1000 + 
@@ -37,6 +41,8 @@ int affichage_temps(struct timeval start_time ,struct timeval current_time, WIND
     return elapsed_time ;
 }
 
+
+
 int debug_input(int input, int lastInput,WINDOW *myWindow) {  //affiche l'input entree par l'utilisateur
     if (input !=  -1 || input != lastInput) { //affiche la derniere input entrer par l'utilisateur (features debug)
         lastInput = input ;
@@ -44,6 +50,18 @@ int debug_input(int input, int lastInput,WINDOW *myWindow) {  //affiche l'input 
     }
     return -1 ;
 }
+
+void ecriture_score(int time, WINDOW *myWindow) {
+    char username[50] ; //variable qui vas stocker le nom
+
+    curs_set(1) ; //reaffiche le curser
+    echo() ;
+
+    mvwgetstr(myWindow, 4, 62 , username) ; //recupere le choix de l'utilisateur
+    mvwprintw(myWindow,6,1,"%.4s",username) ;
+} 
+
+
 
 void after_game(bool victory, int time){
     int userInput ; //input utilisateur pour fermer le jeu
@@ -57,7 +75,10 @@ void after_game(bool victory, int time){
     if (victory == true) { //si le joueur a gagner
 
         mvwprintw(afterGameBox,1,1,"VICTOIRE") ; //affiche la victoire et le temps du joueur
-        mvwprintw(afterGameBox,3,1,"Votre Temps : %d.%ds",format.seconds,format.milliseconds) ;
+        mvwprintw(afterGameBox,2,1,"Votre Temps : %d.%ds",format.seconds,format.milliseconds) ;
+        mvwprintw(afterGameBox,4,1,"Veilliez choisir un nom à 4 lettre pour conserver le score :") ;
+        
+        ecriture_score(time,afterGameBox) ;
     }
 
     else { //si joueur perds
@@ -73,6 +94,8 @@ void after_game(bool victory, int time){
         }
     }
 }
+
+
 
 void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
 

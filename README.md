@@ -46,7 +46,7 @@ gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c -lncurses
 
 Voici notre avancement actuelle sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v0.3.1*
+*Version actuelle du jeu : v0.4*
 
 > **Légende :**
 >
@@ -68,15 +68,22 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 |Chronomètre               |:white_check_mark:        |**v0.2**|
 |Comparaison des cartes    |:eight_pointed_black_star:|        |
 |Couleur des cartes status |:eight_pointed_black_star:|        |
-|Ecriture highscore        |:eight_pointed_black_star:|        |
-|Highscores stockage       |:eight_pointed_black_star:|        |
+|Ecriture highscore        |:white_check_mark:        |**v0.4**|
+|Highscores stockage       |:white_check_mark:        |**v0.4**|
 |Temps écoulée             |:white_check_mark:        |**v0.2**|
 |Décision auto play        |:x:                       |        |
 |SiteWeb                   |:x:                       |        |
 
 - ### PatchNotes :bookmark_tabs:
 
-*Version actuelle du jeu : v0.3.1*
+*Version actuelle du jeu : v0.4*
+
+- ##### v0.4 :
+> - Implémentation des features suivantes :
+>   - Ecrans de victoire aprés la fin du jeu.
+>   - Jeu en Mode débug (accéssible avec *3* dans le menu)
+> - Réecriture du code de la features timer avec les paramétres suivants
+>   - Calcul des secondes et millisecondes via une structure annexe 
 
 - ###### v0.3.1 :
 > - Optimisation général dans le code du jeu :
@@ -93,7 +100,7 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 
 - ###### v0.2.1 :
 > - Correction de la commande a rentrée dans le terminal pour compiler.
-> - Réecriture du code de la features timer avec les paramétres suivants
+> - Réecriture du code de la features timer avec les paramétres suivants :
 >   - Utilisation de la librairie "time.h" au lieu de ncurses pour une meilleur gestion du temps
 >   - Implementation direct dans la fonction de jeu pour l'utiliser en même temps que le jeu 
 >   - mise en place du nodelay et timeout pour la gestion des inupts du jeu
