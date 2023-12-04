@@ -3,6 +3,20 @@
 #include <sys/time.h> //librarie pour utiliser le chrono
 #include <stdbool.h>
 
+struct timeFormat { //structure du format du temps
+    int seconds ;
+    int milliseconds ;
+};
+
+struct timeFormat conMS(time) { //mise a format du temps via la structures préscédentes 
+   struct timeFormat format;
+
+   format.seconds = time / 1000; //mise au format seconds
+   format.milliseconds = (time % 1000) / 100; //mise au format milliseconds
+
+   return format; // retourne le format bien comme il faut
+}
+
 void affiche_tipTool(WINDOW *myWindow) { //affiche le toolTip du jeu(resume de ce qui faut faire)
     const char *texte[2] = {"Jeu des paires","Trouver les paires en un minimun de temps"} ;
     
@@ -12,19 +26,17 @@ void affiche_tipTool(WINDOW *myWindow) { //affiche le toolTip du jeu(resume de c
 }
 
 int affichage_temps(struct timeval start_time ,struct timeval current_time, WINDOW * myWindow) {
-    int seconds, milliseconds ; //vas transformer ce temps en seconds et milliseconds
     int elapsed_time ; //peremts de calculer le temps qui c'est passer depuis le debut du timer
 
     elapsed_time = (current_time.tv_sec - start_time.tv_sec) * 1000 + 
     (current_time.tv_usec - start_time.tv_usec) / 1000; //calculer le temps depuis le debut du timer et la fin
 
-    seconds = elapsed_time / 1000; //calcule la valeur en secondes
-    milliseconds = (elapsed_time % 1000) / 100; //calcule la valeurs a coter en millisecondes
+    struct timeFormat format = conMS(elapsed_time) ; //appelle de la structure de format du temps
 
-    mvwprintw(myWindow,1,1,"Chrono  : %d.%ds", seconds,milliseconds); //affichage dans la fenetre du chrono
+    mvwprintw(myWindow,1,1,"Chrono  : %d.%ds", format.seconds,format.milliseconds); //affichage dans la fenetre du chrono
     wrefresh(myWindow) ; //refresh la fenetre pour afficher le temps du chrono actuel
 
-    return seconds ;
+    return elapsed_time ;
 }
 
 int debug_input(int input, int lastInput,WINDOW *myWindow) {  //affiche l'input entree par l'utilisateur
@@ -35,22 +47,26 @@ int debug_input(int input, int lastInput,WINDOW *myWindow) {  //affiche l'input 
     return -1 ;
 }
 
-void after_game(bool victory, int secondsTime){
-    WINDOW *afterGameBox = newwin(8,100,22,0); //Fenetre de victoire
-    int userInput ;
+void after_game(bool victory, int time){
+    int userInput ; //input utilisateur pour fermer le jeu
 
-    box(afterGameBox,0,0) ;
+    WINDOW *afterGameBox = newwin(8,100,22,0); //Fenetre de victoire
+
+    box(afterGameBox,0,0) ; //affiche les bordure dans 
     
-    if (victory == true) {
-        mvwprintw(afterGameBox,1,1,"VICTOIRE") ;
+    if (victory == true) { //si le joueur a gagner
+        struct timeFormat format = conMS(time) ; //appelle de la structure de format du temps
+
+        mvwprintw(afterGameBox,1,1,"VICTOIRE") ; //affiche la victoire et le temps du joueur
+        mvwprintw(afterGameBox,3,1,"Votre Temps : %d.%ds",format.seconds,format.milliseconds) ;
     }
 
-    else {
+    else { //si joueur perds
         mvwprintw(afterGameBox,1,1,"DEFAITE") ;
     }
         wrefresh(afterGameBox) ;
     while (1)
-    {
+    { //attends un echap avant de quitter le jeu
 
         userInput = getch() ;
         if(userInput == 27) { //Quand echap press, termine le jeu (features debug)
@@ -65,7 +81,7 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
 
     int userInput,lastInput  = 0; //variable pour les inputs joueur
     int inGameTime ; //temps passé dans le jeu, il recupérer dans la fonction de calcul de temps.
-    bool victory = true ;
+    bool victory = true ; //condition de victoire, ici mis en true par defaut pour debug le programme 
 
     WINDOW *tipToolBox = newwin(4,70,0,0) ; //Fenetre du toolTip du jeu
     WINDOW *chronoBox = newwin(4,29,0,71) ; //Fenetre du chrono du jeu
@@ -99,6 +115,6 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
             break;
         }
 
-    } while (inGameTime < 120 ); //temps du chrono (dans la version final, on sera a 120s)
-    after_game(victory,inGameTime) ;
+    } while ((inGameTime / 1000) < 120 ); //temps du chrono (dans la version final, on sera a 120s)
+    after_game(victory,inGameTime) ; // lance la fenetre d'aprés jeu
 }
