@@ -26,12 +26,10 @@ void affiche_tipTool(WINDOW *myWindow) { //affiche le toolTip du jeu(resume de c
 }
 
 int affichage_temps(struct timeval start_time ,struct timeval current_time, WINDOW * myWindow) {
-    int elapsed_time ; //peremts de calculer le temps qui c'est passer depuis le debut du timer
-
-    elapsed_time = (current_time.tv_sec - start_time.tv_sec) * 1000 + 
+    int elapsed_time = (current_time.tv_sec - start_time.tv_sec) * 1000 + 
     (current_time.tv_usec - start_time.tv_usec) / 1000; //calculer le temps depuis le debut du timer et la fin
 
-    struct timeFormat format = SecondsAndMilliseconds(elapsed_time) ; //appelle de la structure de format du temps
+    struct timeFormat format = SecondsAndMilliseconds(elapsed_time) ; //appel de la structure de format du temps
 
     mvwprintw(myWindow,1,1,"Chrono  : %d.%ds", format.seconds,format.milliseconds); //affichage dans la fenetre du chrono
     wrefresh(myWindow) ; //refresh la fenetre pour afficher le temps du chrono actuel
@@ -50,12 +48,13 @@ int debug_input(int input, int lastInput,WINDOW *myWindow) {  //affiche l'input 
 void after_game(bool victory, int time){
     int userInput ; //input utilisateur pour fermer le jeu
 
+    struct timeFormat format = SecondsAndMilliseconds(time) ; //appel de la structure de format du temps
+
     WINDOW *afterGameBox = newwin(8,100,22,0); //Fenetre de victoire
 
     box(afterGameBox,0,0) ; //affiche les bordure dans 
     
     if (victory == true) { //si le joueur a gagner
-        struct timeFormat format = SecondsAndMilliseconds(time) ; //appelle de la structure de format du temps
 
         mvwprintw(afterGameBox,1,1,"VICTOIRE") ; //affiche la victoire et le temps du joueur
         mvwprintw(afterGameBox,3,1,"Votre Temps : %d.%ds",format.seconds,format.milliseconds) ;
