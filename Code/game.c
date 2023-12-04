@@ -1,5 +1,7 @@
 #include <ncurses.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #include <sys/time.h> //librarie pour utiliser le chrono
 #include <stdbool.h>
 
@@ -15,6 +17,15 @@ struct timeFormat SecondsAndMilliseconds(int time) { //mise a format du temps vi
    format.milliseconds = (time % 1000) / 100; //mise au format milliseconds
 
    return format; // retourne le format bien comme il faut
+}
+
+
+
+void stringUpper ( char *string ) { //permet de convertire un string en majuscule
+    while( *string ){ 
+        *string=toupper( *string );
+        string++;
+    }
 }
 
 
@@ -54,11 +65,15 @@ int debug_input(int input, int lastInput,WINDOW *myWindow) {  //affiche l'input 
 void ecriture_score(int time, WINDOW *myWindow) {
     char username[50] ; //variable qui vas stocker le nom
 
+    struct timeFormat format = SecondsAndMilliseconds(time) ;
+
     curs_set(1) ; //reaffiche le curser
-    echo() ;
+    echo() ; //réactive l'affichage des inputs entrée par l'utilisateur
 
     mvwgetstr(myWindow, 4, 62 , username) ; //recupere le choix de l'utilisateur
-    mvwprintw(myWindow,6,1,"%.4s",username) ;
+    stringUpper(username) ; //mettre en majuscule le username
+
+    mvwprintw(myWindow,6,1,"%.4s %d.%ds",username,format.seconds,format.milliseconds) ; //print le nom de l'utilisateur (debug)
 } 
 
 
