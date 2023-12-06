@@ -102,7 +102,14 @@ void ecriture_score(int time, WINDOW *myWindow) {
     fscanf(highscore, "3 %4s %f\n", scorelist[2].name, &scorelist[2].score);
 
     for(int i=3;i>0;i--){
-        if(scorelist[i].score<scorelist[i-1].score){
+        if(scorelist[i-1].score==0 && strlen(scorelist[i-1].name)==0){
+            scorelist[i-1].score=scorelist[i].score;
+            strcpy(scorelist[i-1].name,scorelist[i].name);
+
+            scorelist[i].score=0;
+            scorelist[i].name[0]='\0';
+        }
+        else if(scorelist[i].score<scorelist[i-1].score){
             temp.score=scorelist[i-1].score;
             strcpy(temp.name, scorelist[i-1].name);
 
@@ -126,19 +133,21 @@ void ecriture_score(int time, WINDOW *myWindow) {
     
 
     for(int i=0;i<3;i++){
-        fprintf(highscore, "%d %4s %.1f\n", (i+1), scorelist[i].name, scorelist[i].score);
-    
+        if(scorelist[i].score != 0 && strlen(scorelist[i].name)!=0){
+            fprintf(highscore, "%d %4s %.1f\n", (i+1), scorelist[i].name, scorelist[i].score);
+        }
     }
+    
+    fclose(highscore);
     werase(myWindow) ;
     box(myWindow,0,0) ;
     mvwprintw(myWindow,2,1,"Meilleurs temps :") ;
     for(int i = 0 ; i < 3 ; i++) {
+        if(scorelist[i].score != 0 && strlen(scorelist[i].name)!=0){
         mvwprintw(myWindow,3+i,1,"%d %s %.1f",i+1,scorelist[i].name,scorelist[i].score) ;
+        }
     }
     noecho() ;
-
-
-    fclose(highscore);
 
 } 
 

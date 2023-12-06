@@ -1,6 +1,7 @@
 {
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
-        "ncurses.h": "c"
+        "stdio.h": "c",
+        "string.h": "c"
     }
 }
