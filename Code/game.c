@@ -19,7 +19,10 @@ struct timeFormat SecondsAndMilliseconds(int time) { //mise a format du temps vi
    return format; // retourne le format bien comme il faut
 }
 
-
+struct score{ //structure de score 
+    char name[5];
+    float score;
+};
 
 
 
@@ -54,12 +57,6 @@ int affichage_temps(struct timeval start_time ,struct timeval current_time, WIND
 
     return elapsed_time ;
 }
-
-
-struct score{ //structure de score 
-    char name[5];
-    float score;
-};
 
 
 
