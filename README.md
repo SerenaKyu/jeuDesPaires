@@ -4,6 +4,8 @@
 
  Le jeu des paires est un jeu de carte ou le but est de trouver le plus rapidement des ensembles de cartes identiques, soyer le plus rapide à trouver toute les paires afin de pouvoir marquer le meilleur score possible ! 
 
+---
+
  - ### Installation, Compilation & OS disponible :arrow_down:
 
 Le programme est seulement disponible sur n'importe quel distribution **Linux.:penguin:** Pour compiler le code, vous aurez besoin au de :
@@ -34,13 +36,17 @@ gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c -lncurses
 
 ./a.out
 ```
-> *il est quand meme préférable de passer par le makefile présent dans le dossier Output* 
+> *il est quand meme préférable de passer par le makefile présent dans le dossier Output*
+
+---
 
 - ### Commandes de l'interface du jeu :video_game:
 
 - ##### Liste des commandes utilisateur possible dans le programme :
 
     - **Echap** = fin de tâche de jeu *(outil de debug)*.
+
+---
 
 - ### ToDo list :memo::white_check_mark:
 
@@ -73,6 +79,8 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 |Temps écoulée             |:white_check_mark:        |**v0.2**|
 |Décision auto play        |:x:                       |        |
 |SiteWeb                   |:x:                       |        |
+
+---
 
 - ### PatchNotes :bookmark_tabs:
 
