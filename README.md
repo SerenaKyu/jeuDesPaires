@@ -86,6 +86,11 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 
 *Version actuelle du jeu : v0.4.1*
 
+- ###### v0.4.2 :
+> - Optimisation de la fonction de la gestion du score
+> - Mise en place de la fenetre de défaite différentes de la fenetre de victoire
+> - Ajout de commentaire à la fonction d'écriture/lecture du fichier et gestion du scores
+
 - ###### v0.4.1 :
 > - Implémentation des features suivantes :
 >   - Outil de debug suivant :
