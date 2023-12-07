@@ -70,7 +70,7 @@ int debug_input(int input, int lastInput,WINDOW *myWindow) {  //affiche l'input 
 
 void ecriture_score(int time, WINDOW *myWindow) {
     FILE *highscore;
-    char username[50] ; //variable qui vas stocker le nom
+    char username[5] ; //variable qui vas stocker le nom
 
     struct timeFormat format = SecondsAndMilliseconds(time) ;
     float userscore = format.seconds + (format.milliseconds)*0.1 ;
@@ -81,14 +81,22 @@ void ecriture_score(int time, WINDOW *myWindow) {
     curs_set(1) ; //reaffiche le curser
     echo() ; //réactive l'affichage des inputs entrée par l'utilisateur
 
-    mvwgetstr(myWindow, 4, 62 , username) ; //recupere le choix de l'utilisateur
-    stringUpper(username) ; //mettre en majuscule le username    FILE *highscore;
+    while (strlen(username) < 4)
+    {
+        mvwprintw(myWindow,4,1,"Veilliez choisir un nom à 4 lettre pour conserver le score :      ") ;
+        mvwgetnstr(myWindow, 4, 62 , username,4) ; //recupere le choix de l'utilisateur
+        if(strlen(username) < 4) {
+            mvwprintw(myWindow,2,1,"NOM INCORRECTE, VEILLIEZ ENTRER UN NOMBRE A 4 LETTRE ") ;
+        }
+    }
+    
+    stringUpper(username) ; //mettre en majuscule le username   
 
     highscore = fopen("../Data/jeuhighscore.txt", "r");
 
     if(highscore == NULL){ // Vérifie si le fichier jeuhighscore.txt a bien été ouvert
-        printf("Erreur lors de l'ouverture du fichiers des scores");
-        exit(1);
+        endwin() ;
+        fprintf(stderr,"Erreur 12 : fichier non ouvert\n") ;
     }
 
     scorelist[3].score=userscore; //mets le score du joeur dedans
@@ -117,8 +125,8 @@ void ecriture_score(int time, WINDOW *myWindow) {
 
     
     if(highscore == NULL){ // Vérifie si le fichier jeuhighscore.txt a bien été ouvert
-        printf("Erreur lors de l'écriture du fichiers des scores");
-        exit(2);
+        endwin() ;
+        fprintf(stderr,"Erreur 13 : Impossible d'écrire dans le fichier\n") ;
     } 
     
 
@@ -154,7 +162,6 @@ void after_game(bool victory, int time){
 
         mvwprintw(afterGameBox,1,1,"VICTOIRE") ; //affiche la victoire et le temps du joueur
         mvwprintw(afterGameBox,2,1,"Votre Temps : %d.%ds",format.seconds,format.milliseconds) ;
-        mvwprintw(afterGameBox,4,1,"Veilliez choisir un nom à 4 lettre pour conserver le score :") ;
         
         ecriture_score(time,afterGameBox) ;
         mvwprintw(afterGameBox,1,1,"VICTOIRE") ; 

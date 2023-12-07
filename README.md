@@ -52,7 +52,7 @@ gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c -lncurses
 
 Voici notre avancement actuelle sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v0.4*
+*Version actuelle du jeu : v0.4.1*
 
 > **Légende :**
 >
@@ -84,7 +84,16 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 
 - ### PatchNotes :bookmark_tabs:
 
-*Version actuelle du jeu : v0.4*
+*Version actuelle du jeu : v0.4.1*
+
+- ###### v0.4.1 :
+> - Implémentation des features suivantes :
+>   - Outil de debug suivant :
+>       - Menu debug pour choisir ces option
+>       - Possibilité de rénitialiser le fichier ``jeuhighscore.txt``
+>   - Une sécurité pour l'utilisateur d'entrer des noms en dessous et au dessus de 4 charactére
+> - Résolution d'un probléme qui faisait que les noms soit mal lu
+> - Correction d'un bug qui faisait que les sortie erreur ne s'affichait pas 
 
 - ##### v0.4 :
 > - Implémentation des features suivantes :
