@@ -52,7 +52,7 @@ gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c -lncurses
 
 Voici notre avancement actuelle sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v0.4.1*
+*Version actuelle du jeu : v0.4.2*
 
 > **Légende :**
 >
@@ -84,12 +84,13 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 
 - ### PatchNotes :bookmark_tabs:
 
-*Version actuelle du jeu : v0.4.1*
+*Version actuelle du jeu : v0.4.2*
 
 - ###### v0.4.2 :
 > - Optimisation de la fonction de la gestion du score
 > - Mise en place de la fenetre de défaite différentes de la fenetre de victoire
 > - Ajout de commentaire à la fonction d'écriture/lecture du fichier et gestion du scores
+> - réecriture des .h
 
 - ###### v0.4.1 :
 > - Implémentation des features suivantes :
