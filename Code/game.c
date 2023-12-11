@@ -13,7 +13,13 @@ struct timeFormat { //structure du format du temps
     int milliseconds ;
 };
 
-struct timeFormat SecondsAndMilliseconds(int time) { //mise a format du temps via la structures précédentes 
+struct card { //structure qui gere le format des cartes (leur position, le statuts )
+    WINDOW* windowCard; //fenetre de la carte
+    char status ; //status de la carte
+    char value ; // valeur de la carte
+};
+
+struct timeFormat SecondsAndMilliseconds(int time) { //fonction de mise a format du temps via la structures précédentes 
    struct timeFormat format;
 
    format.seconds = time / 1000; //mise au format seconds
@@ -49,9 +55,33 @@ int debug_input(int input, int lastInput,WINDOW *myWindow) {  //affiche l'input 
     return lastInput ;
 }
 
+void visualCard(struct card chosenCard , bool debugMode) {
+    wattron(chosenCard.windowCard,COLOR_PAIR(3)) ;
+    wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;
+    if(debugMode == true) {
+        mvwprintw(chosenCard.windowCard,3,4,"%c",chosenCard.value) ;
+    }
+    wrefresh(chosenCard.windowCard) ;
+}
+
+void printCard(struct card carte) {
+    visualCard(carte,true) ;
+}
+
+void selectedCard(struct card chosenCard){
+    wattron(chosenCard.windowCard,COLOR_PAIR(2)) ;
+    wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;
+    mvwprintw(chosenCard.windowCard,3,4,"%c",chosenCard.value) ;
+    wrefresh(chosenCard.windowCard) ;
+} 
+
 void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
 
     struct timeval start_time, current_time; //structure de temps en time.h
+    struct card testCarte ;
+
+    testCarte.windowCard = newwin(7,9,5,0) ;
+    testCarte.value = 'c' ;
 
     int userInput,lastInput  = 0; //variable pour les inputs joueur
     int inGameTime ; //temps passé dans le jeu, il recupérer dans la fonction de calcul de temps.
@@ -68,11 +98,17 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
     noecho() ; //enleve l'affiche des inputs rentrer par l'utilisateur
     curs_set(0); //enleve le curseur de la fenetre du terminal
     timeout(100) ; // mets le temps 
-    cbreak() ;
+
+    init_pair(1, COLOR_GREEN, COLOR_BLACK); // Initialise la paire de couleur verte
+    init_pair(2, COLOR_CYAN, COLOR_BLACK); // Initialise la paire de couleur cyan
+    init_pair(3, COLOR_WHITE, COLOR_BLACK); // Initialise les paires de couleur
 
     affiche_tipTool(tipToolBox) ; //affiche la description 
     wrefresh(tipToolBox) ;
     wrefresh(chronoBox) ;
+
+    //printCard() ;
+    printCard(testCarte) ;
 
     gettimeofday(&start_time, NULL) ; //recuperer la valeur de debut du chrono et du jeu
 
@@ -92,6 +128,13 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
             case 'q'  : //Quand q press, termine le jeu et applique une défaite
                 forfait = true ; //termine le do while grace a la variable de forfait du joueur.
                 break;
+            case 'a' : //deplacement gauche
+                break;
+            case 'z' : //deplacement droit
+                break;
+            case 'e' : //sélection carte
+                break;
+
         } 
 
     } while ((inGameTime / 1000) < 120 && forfait != true); //temps du chrono (dans la version final, on sera a 120s)
