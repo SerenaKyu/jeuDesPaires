@@ -44,7 +44,8 @@ gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c -lncurses
 
 - ##### Liste des commandes utilisateur possible dans le programme :
 
-    - **Echap** = fin de tâche de jeu *(outil de debug)*.
+    - **q** = Mettre fin au jeu.
+    - ****
 
 ---
 
@@ -52,7 +53,7 @@ gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c -lncurses
 
 Voici notre avancement actuelle sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v0.4.2*
+*Version actuelle du jeu : v0.4.3*
 
 > **Légende :**
 >
@@ -84,7 +85,10 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 
 - ### PatchNotes :bookmark_tabs:
 
-*Version actuelle du jeu : v0.4.2*
+*Version actuelle du jeu : v0.4.3*
+
+- ###### v0.4.3 :
+> - Modification de la touche de fin de tâche du jeu basé sur les besoin du cahier des charges
 
 - ###### v0.4.2 :
 > - Optimisation de la fonction de la gestion du score
