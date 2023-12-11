@@ -1,6 +1,7 @@
 #include <ncurses.h> // stdio.h est inclue dans ncurses.h
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 #include "menu.h" //Permets de gerer l'affichage de l'ecran titre et des différentes
                  // erreures

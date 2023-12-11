@@ -1,6 +1,8 @@
 {
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
-        "ncurses.h": "c"
+        "ncurses.h": "c",
+        "aftergame.h": "c",
+        "menu.h": "c"
     }
 }

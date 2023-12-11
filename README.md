@@ -53,7 +53,7 @@ gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c -lncurses
 
 Voici notre avancement actuelle sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v0.4.3*
+*Version actuelle du jeu : v0.4.4*
 
 > **Légende :**
 >
@@ -85,7 +85,10 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 
 - ### PatchNotes :bookmark_tabs:
 
-*Version actuelle du jeu : v0.4.3*
+*Version actuelle du jeu : v0.4.4*
+
+- ###### v0.4.4 :
+> - déplacement des features d'aprés jeu dans `aftergame.c`
 
 - ###### v0.4.3 :
 > - Modification de la touche de fin de tâche du jeu basé sur les besoin du cahier des charges
