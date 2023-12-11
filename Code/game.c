@@ -45,9 +45,8 @@ int affichage_temps(struct timeval start_time ,struct timeval current_time, WIND
 int debug_input(int input, int lastInput,WINDOW *myWindow) {  //affiche l'input entree par l'utilisateur
     if (input !=  -1 || input != lastInput) { //affiche la derniere input entrer par l'utilisateur (features debug)
         lastInput = input ;
-        return lastInput ;
     }
-    return -1 ;
+    return lastInput ;
 }
 
 void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
@@ -56,7 +55,8 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
 
     int userInput,lastInput  = 0; //variable pour les inputs joueur
     int inGameTime ; //temps passé dans le jeu, il recupérer dans la fonction de calcul de temps.
-    bool victory = true ; //condition de victoire, ici mis en true par defaut pour debug le programme 
+    bool victory = false ; //condition de victoire, ici mis en true par defaut pour debug le programme 
+    bool forfait = false ;
 
     WINDOW *tipToolBox = newwin(4,70,0,0) ; //Fenetre du toolTip du jeu
     WINDOW *chronoBox = newwin(4,29,0,71) ; //Fenetre du chrono du jeu
@@ -64,9 +64,11 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
     box(tipToolBox,0,0) ; //affichage des 2 fenetre
     box(chronoBox,0,0) ;
 
+    start_color(); //initialise la couleur
     noecho() ; //enleve l'affiche des inputs rentrer par l'utilisateur
     curs_set(0); //enleve le curseur de la fenetre du terminal
     timeout(100) ; // mets le temps 
+    cbreak() ;
 
     affiche_tipTool(tipToolBox) ; //affiche la description 
     wrefresh(tipToolBox) ;
@@ -86,11 +88,12 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
             mvwprintw(chronoBox,2,1,"Input : %c   ",lastInput) ; //affiche le dernier input
         }
         
-        if(userInput == 'q') { //Quand echap press, termine le jeu (features debug)
-            break;
-        }
+        switch(userInput) {
+            case 'q'  : //Quand q press, termine le jeu et applique une défaite
+                forfait = true ; //termine le do while grace a la variable de forfait du joueur.
+                break;
+        } 
 
-    } while ((inGameTime / 1000) < 120 ); //temps du chrono (dans la version final, on sera a 120s)
+    } while ((inGameTime / 1000) < 120 && forfait != true); //temps du chrono (dans la version final, on sera a 120s)
     after_game(victory,inGameTime) ; // lance la fenetre d'aprés jeu
 }
-
