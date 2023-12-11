@@ -88,7 +88,7 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 *Version actuelle du jeu : v0.4.4*
 
 - ###### v0.4.4 :
-> - déplacement des features d'aprés jeu dans u `aftergame.c`
+> - déplacement des features d'aprés jeu dans `aftergame.c`
 
 - ###### v0.4.3 :
 > - Modification de la touche de fin de tâche du jeu basé sur les besoin du cahier des charges
