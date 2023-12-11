@@ -184,7 +184,7 @@ void after_game(bool victory, int time){
     { //attends un echap avant de quitter le jeu
 
         userInput = getch() ;
-        if(userInput == 27) { //Quand echap press, termine le jeu (features debug)
+        if(userInput == 'q') { //Quand echap press, termine le jeu (features debug)
             break;
         }
     }
@@ -228,7 +228,7 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
             mvwprintw(chronoBox,2,1,"Input : %c   ",lastInput) ; //affiche le dernier input
         }
         
-        if(userInput == 27) { //Quand echap press, termine le jeu (features debug)
+        if(userInput == 'q') { //Quand echap press, termine le jeu (features debug)
             break;
         }
 
