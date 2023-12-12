@@ -3,6 +3,7 @@
     "files.associations": {
         "ncurses.h": "c",
         "aftergame.h": "c",
-        "menu.h": "c"
+        "menu.h": "c",
+        "time.h": "c"
     }
 }

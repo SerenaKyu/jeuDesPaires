@@ -13,11 +13,11 @@ struct timeFormat { //structure du format du temps
     int milliseconds ;
 };
 
-struct card { //structure qui gere le format des cartes (leur position, le statuts )
+typedef struct card { //structure qui gere le format des cartes (leur position, le statuts )
     WINDOW* windowCard; //fenetre de la carte
     char status ; //status de la carte
     char value ; // valeur de la carte
-};
+}card;
 
 struct timeFormat SecondsAndMilliseconds(int time) { //fonction de mise a format du temps via la structures précédentes 
    struct timeFormat format;
@@ -64,8 +64,8 @@ void visualCard(struct card chosenCard , bool debugMode) {
     wrefresh(chosenCard.windowCard) ;
 }
 
-void printCard(struct card carte) {
-    visualCard(carte,true) ;
+void printCard(struct card carte, bool debugMode) {
+    visualCard(carte,debugMode) ;
 }
 
 void selectedCard(struct card chosenCard){
@@ -108,7 +108,7 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
     wrefresh(chronoBox) ;
 
     //printCard() ;
-    printCard(testCarte) ;
+    printCard(testCarte,debugMode) ;
 
     gettimeofday(&start_time, NULL) ; //recuperer la valeur de debut du chrono et du jeu
 

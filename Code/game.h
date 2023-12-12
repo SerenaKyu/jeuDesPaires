@@ -1,8 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-
-
 struct timeFormat { //format de temps
     int seconds;
     int milliseconds;
