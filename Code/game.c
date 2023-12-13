@@ -17,6 +17,7 @@ typedef struct card { //structure qui gere le format des cartes (leur position, 
     WINDOW* windowCard; //fenetre de la carte
     char status ; //status de la carte
     char value ; // valeur de la carte
+    bool hover ;
 }playcard;
 
 struct timeFormat SecondsAndMilliseconds(int time) { //fonction de mise a format du temps via la structures précédentes 
@@ -61,6 +62,9 @@ void hiddenCard(playcard chosenCard , bool debugMode) {
     if(debugMode == true) {
         mvwprintw(chosenCard.windowCard,3,4,"%c",chosenCard.value) ;
     }
+    else{
+        mvwprintw(chosenCard.windowCard,3,4," ") ; 
+    }
     wrefresh(chosenCard.windowCard) ;
 }
 
@@ -93,22 +97,24 @@ void onCard(playcard chosenCard) {
 }
 
 void selectedCard(playcard chosenCard){
-    wattron(chosenCard.windowCard,COLOR_PAIR(2)) ;
+    wattron(chosenCard.windowCard,COLOR_PAIR(3)) ;
     wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;
-    mvwprintw(chosenCard.windowCard,3,4,"%c",chosenCard.value) ;
     wrefresh(chosenCard.windowCard) ;
 }   
 
 void cardStatusUpdate(playcard *chosenCard,int userPosition, bool debugMode){
     for(int i=0;i < 12;i++){
-        if(i == userPosition){
-            chosenCard[userPosition].status = 'o' ;
-        }
-        else{
+        if(chosenCard[i].status != 's' && chosenCard[i].status != 'g' && chosenCard[userPosition].hover != true){
             chosenCard[i].status = 'h';
+        }
+        if(i == userPosition){
+            chosenCard[userPosition].hover = true ;
         }
         switch (chosenCard[i].status) 
         {
+        case 's' :
+            selectedCard(chosenCard[i]) ;   
+            break;
         case 'o':
             onCard(chosenCard[i]);
             break;
@@ -118,6 +124,16 @@ void cardStatusUpdate(playcard *chosenCard,int userPosition, bool debugMode){
             break;
         }
     }
+}
+
+int checkPose(int pose){
+    if(pose > 11) {
+        pose = 0 ;
+        } 
+    else if(pose < 0) {
+        pose = 11 ;
+    }
+    return pose;
 }
 
 void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
@@ -161,8 +177,6 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
 
         userInput = getch(); //récupere l'input utilisateur pour commander le jeu
 
-        cardStatusUpdate(testCarte,userPosition,debugMode);
-
         if(debugMode == true) {
             lastInput = debug_input(userInput,lastInput,chronoBox) ;
             mvwprintw(chronoBox,2,1,"Input : %c",lastInput) ; //affiche le dernier input
@@ -174,15 +188,24 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
                 break;
             case 'a' : //deplacement gauche
                 userPosition --;
+                while(testCarte[userPosition].status != 'h'){
+                    userPosition --;
+                }
                 break;
             case 'z' : //deplacement droit
                 userPosition ++;
+                while(testCarte[userPosition].status != 'h'){
+                    userPosition ++;
+                }
                 break;
             case 'e' : //sélection carte
+                testCarte[userPosition].status = 's' ;
                 break;
+        }
 
-        } 
+        userPosition = checkPose(userPosition);
 
+        cardStatusUpdate(testCarte,userPosition,debugMode);
     } while ((inGameTime / 1000) < 120 && forfait != true); //temps du chrono (dans la version final, on sera a 120s)
     after_game(victory,inGameTime) ; // lance la fenetre d'aprés jeu
 }
