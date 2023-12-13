@@ -67,20 +67,21 @@ void hiddenCard(playcard chosenCard , bool debugMode) {
 void definitionCard(playcard *carte) {
 
     int position_x[6] = {1,11,21,31,41,51} ;
-    int position_y[2] = {5,15} ;
+    int position_y = 5;
 
-    //for(int i = 0 ; i < 2 ;i++) {
-        for(int j = 0 ; j < 6;j++){
-            carte[j].windowCard = newwin(7,9,position_y[0],position_x[j]) ;
-            carte[j].status = 'h' ;
-            carte[j].value = 'c' ;
-        }
-    //}
+    for(int i = 0 ; i < 12 ;i++) {
+            if(i == 6) {
+                position_y = 13;
+            }
+            carte[i].windowCard = newwin(7,9,position_y,position_x[i%6]) ;
+            carte[i].status = 'h' ;
+            carte[i].value = 'c' ;
+    }
 }
 
 void printCard(playcard *carte, bool debugMode) {
     definitionCard(carte);
-    for(int i = 0;i < 6;i++){
+    for(int i = 0;i < 12;i++){
         hiddenCard(carte[i],debugMode) ;
     }
 }
