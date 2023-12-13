@@ -63,9 +63,9 @@ void gestion_classement(int time, WINDOW *myWindow,bool victory) {
         fprintf(stderr,"Erreur 12 : fichier non ouvert\n") ;
     }
 
-    fscanf(highscore, "1 %4s %f\n", scorelist[0].name, &scorelist[0].score); //copie des score dans la liste des variables scores
-    fscanf(highscore, "2 %4s %f\n", scorelist[1].name, &scorelist[1].score);
-    fscanf(highscore, "3 %4s %f\n", scorelist[2].name, &scorelist[2].score);
+    for(int i = 0; i < 3; i++){ //copie des score dans la liste des variables scores
+        fscanf(highscore, "%d %4s %f\n", (&i) + 1,scorelist[i].name, &scorelist[i].score);
+    }
 
     if(victory == true) { //demande le pseudo si le joueur a gagner 
         while (strlen(username) < 4) //Demande au joueur de rentrer son nom, si il est trop petit, il redemande

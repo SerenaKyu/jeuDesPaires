@@ -56,7 +56,7 @@ int debug_input(int input, int lastInput,WINDOW *myWindow) {  //affiche l'input 
 }
 
 void hiddenCard(playcard chosenCard , bool debugMode) {
-    wattron(chosenCard.windowCard,COLOR_PAIR(3)) ;
+    wattron(chosenCard.windowCard,COLOR_PAIR(1)) ;
     wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;
     if(debugMode == true) {
         mvwprintw(chosenCard.windowCard,3,4,"%c",chosenCard.value) ;
@@ -86,12 +86,39 @@ void printCard(playcard *carte, bool debugMode) {
     }
 }
 
-void selectedCard(playcard chosenCard, int nb){
+void onCard(playcard chosenCard) {
+    wattron(chosenCard.windowCard,COLOR_PAIR(2)) ;
+    wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;
+    wrefresh(chosenCard.windowCard) ;
+}
+
+void selectedCard(playcard chosenCard){
     wattron(chosenCard.windowCard,COLOR_PAIR(2)) ;
     wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;
     mvwprintw(chosenCard.windowCard,3,4,"%c",chosenCard.value) ;
     wrefresh(chosenCard.windowCard) ;
-} 
+}   
+
+void cardStatusUpdate(playcard *chosenCard,int userPosition, bool debugMode){
+    for(int i=0;i < 12;i++){
+        if(i == userPosition){
+            chosenCard[userPosition].status = 'o' ;
+        }
+        else{
+            chosenCard[i].status = 'h';
+        }
+        switch (chosenCard[i].status) 
+        {
+        case 'o':
+            onCard(chosenCard[i]);
+            break;
+        
+        case 'h':
+            hiddenCard(chosenCard[i],debugMode);
+            break;
+        }
+    }
+}
 
 void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
 
@@ -100,6 +127,7 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
 
     int userInput,lastInput  = 0; //variable pour les inputs joueur
     int inGameTime ; //temps passé dans le jeu, il recupérer dans la fonction de calcul de temps.
+    int userPosition = 0;//définie la postion de l'utilisateur dans les cartes
     bool victory = false ; //condition de victoire, ici mis en true par defaut pour debug le programme 
     bool forfait = false ;
 
@@ -114,9 +142,9 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
     curs_set(0); //enleve le curseur de la fenetre du terminal
     timeout(100) ; // mets le temps 
 
-    init_pair(1, COLOR_GREEN, COLOR_BLACK); // Initialise la paire de couleur verte
-    init_pair(2, COLOR_CYAN, COLOR_BLACK); // Initialise la paire de couleur cyan
-    init_pair(3, COLOR_WHITE, COLOR_BLACK); // Initialise les paires de couleur
+    init_pair(1, COLOR_WHITE, COLOR_BLACK); // Initialise les paires de couleur
+    init_pair(2, COLOR_GREEN, COLOR_BLACK); // Initialise la paire de couleur verte
+    init_pair(3, COLOR_CYAN, COLOR_BLACK); // Initialise la paire de couleur cyan
 
     affiche_tipTool(tipToolBox) ; //affiche la description 
     wrefresh(tipToolBox) ;
@@ -133,9 +161,11 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
 
         userInput = getch(); //récupere l'input utilisateur pour commander le jeu
 
+        cardStatusUpdate(testCarte,userPosition,debugMode);
+
         if(debugMode == true) {
             lastInput = debug_input(userInput,lastInput,chronoBox) ;
-            mvwprintw(chronoBox,2,1,"Input : %c   ",lastInput) ; //affiche le dernier input
+            mvwprintw(chronoBox,2,1,"Input : %c",lastInput) ; //affiche le dernier input
         }
         
         switch(userInput) {
@@ -143,8 +173,10 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
                 forfait = true ; //termine le do while grace a la variable de forfait du joueur.
                 break;
             case 'a' : //deplacement gauche
+                userPosition --;
                 break;
             case 'z' : //deplacement droit
+                userPosition ++;
                 break;
             case 'e' : //sélection carte
                 break;
