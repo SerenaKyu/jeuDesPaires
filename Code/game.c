@@ -17,7 +17,7 @@ typedef struct card { //structure qui gere le format des cartes (leur position, 
     WINDOW* windowCard; //fenetre de la carte
     char status ; //status de la carte
     char value ; // valeur de la carte
-}card;
+}playcard;
 
 struct timeFormat SecondsAndMilliseconds(int time) { //fonction de mise a format du temps via la structures précédentes 
    struct timeFormat format;
@@ -55,7 +55,7 @@ int debug_input(int input, int lastInput,WINDOW *myWindow) {  //affiche l'input 
     return lastInput ;
 }
 
-void visualCard(struct card chosenCard , bool debugMode) {
+void hiddenCard(playcard chosenCard , bool debugMode) {
     wattron(chosenCard.windowCard,COLOR_PAIR(3)) ;
     wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;
     if(debugMode == true) {
@@ -64,11 +64,28 @@ void visualCard(struct card chosenCard , bool debugMode) {
     wrefresh(chosenCard.windowCard) ;
 }
 
-void printCard(struct card carte, bool debugMode) {
-    visualCard(carte,debugMode) ;
+void definitionCard(playcard *carte) {
+
+    int position_x[6] = {1,11,21,31,41,51} ;
+    int position_y[2] = {5,15} ;
+
+    //for(int i = 0 ; i < 2 ;i++) {
+        for(int j = 0 ; j < 6;j++){
+            carte[j].windowCard = newwin(7,9,position_y[0],position_x[j]) ;
+            carte[j].status = 'h' ;
+            carte[j].value = 'c' ;
+        }
+    //}
 }
 
-void selectedCard(struct card chosenCard){
+void printCard(playcard *carte, bool debugMode) {
+    definitionCard(carte);
+    for(int i = 0;i < 6;i++){
+        hiddenCard(carte[i],debugMode) ;
+    }
+}
+
+void selectedCard(playcard chosenCard, int nb){
     wattron(chosenCard.windowCard,COLOR_PAIR(2)) ;
     wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;
     mvwprintw(chosenCard.windowCard,3,4,"%c",chosenCard.value) ;
@@ -78,10 +95,7 @@ void selectedCard(struct card chosenCard){
 void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
 
     struct timeval start_time, current_time; //structure de temps en time.h
-    struct card testCarte ;
-
-    testCarte.windowCard = newwin(7,9,5,0) ;
-    testCarte.value = 'c' ;
+    playcard testCarte[12] ;
 
     int userInput,lastInput  = 0; //variable pour les inputs joueur
     int inGameTime ; //temps passé dans le jeu, il recupérer dans la fonction de calcul de temps.
@@ -107,7 +121,6 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
     wrefresh(tipToolBox) ;
     wrefresh(chronoBox) ;
 
-    //printCard() ;
     printCard(testCarte,debugMode) ;
 
     gettimeofday(&start_time, NULL) ; //recuperer la valeur de debut du chrono et du jeu
