@@ -16,8 +16,9 @@ struct timeFormat { //structure du format du temps
 typedef struct card { //structure qui gere le format des cartes (leur position, le statuts )
     WINDOW* windowCard; //fenetre de la carte
     char status ; //status de la carte
-    char value ; // valeur de la carte
+    int value ; // valeur de la carte
     bool selected ;
+    bool paired ;
 }playcard;
 
 struct timeFormat SecondsAndMilliseconds(int time) { //fonction de mise a format du temps via la structures précédentes 
@@ -60,7 +61,7 @@ void hiddenCard(playcard chosenCard , bool debugMode) {
     wattron(chosenCard.windowCard,COLOR_PAIR(1)) ;
     wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;
     if(debugMode == true) {
-        mvwprintw(chosenCard.windowCard,3,4,"%c",chosenCard.value) ;
+        mvwprintw(chosenCard.windowCard,3,4,"%d",chosenCard.value) ;
     }
     else{
         mvwprintw(chosenCard.windowCard,3,4," ") ; 
@@ -79,8 +80,9 @@ void definitionCard(playcard *carte) {
             }
             carte[i].windowCard = newwin(7,9,position_y,position_x[i%6]) ;
             carte[i].status = 'h' ;
-            carte[i].value = 'c' ;
+            carte[i].value = 1 ;
             carte[i].selected = false ;
+            carte[i].paired = false ;
     }
 }
 
@@ -97,6 +99,13 @@ void onCard(playcard chosenCard) {
     wrefresh(chosenCard.windowCard) ;
 }
 
+void pairedCard(playcard chosenCard) {
+    wattron(chosenCard.windowCard,COLOR_PAIR(1)) ;
+    wborder(chosenCard.windowCard,'|','|','-','-','0','0','0','0') ;
+    mvwprintw(chosenCard.windowCard,3,4,"%d",chosenCard.value) ;
+    wrefresh(chosenCard.windowCard) ;
+}
+
 void selectedCard(playcard chosenCard){
     wattron(chosenCard.windowCard,COLOR_PAIR(3)) ;
     wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;
@@ -105,26 +114,65 @@ void selectedCard(playcard chosenCard){
 
 void cardStatusUpdate(playcard *chosenCard,int userPosition, bool debugMode){
     for(int i=0;i < 12;i++){
-        if(chosenCard[i].status != 'g' || chosenCard[userPosition].status != 'o'){
+        if(chosenCard[i].status != 'p'){
             chosenCard[i].status = 'h';
         }
+
         if(i == userPosition){
             chosenCard[userPosition].status = 'o' ;
         }
+
         switch (chosenCard[i].status) 
         {
         case 'o':
             onCard(chosenCard[i]);
             break;
-        
         case 'h':
             hiddenCard(chosenCard[i],debugMode);
             break;
         }
+
+        if(chosenCard[i].paired == true) {
+            pairedCard(chosenCard[i]) ;
+        }
+
         if(chosenCard[i].selected == true) {
             selectedCard(chosenCard[i]) ;
         }
     }
+}
+
+int checkPaires(playcard *chosenCard, bool *freezeInput) {
+    int paires[2] = {-1,-1};
+
+    for(int i = 0; i < 12;i++){
+        if(chosenCard[i].selected == true) {
+            if(paires[0] == -1) {
+                paires[0] = i ;
+            }
+            else{
+                paires[1] = i ;
+            }
+        }
+    }
+
+    if(paires[0] != -1 && paires[1] != -1){
+        for(int i = 0 ; i < 2; i++){
+            hiddenCard(chosenCard[paires[i]],true);
+        }
+        napms(2000);
+        for(int i = 0 ; i < 2; i++){
+            chosenCard[paires[i]].selected = false;
+        }
+        if(chosenCard[paires[0]].value == chosenCard[paires[1]].value) {
+            for(int i = 0; i < 2; i++){
+                pairedCard(chosenCard[paires[0]]);
+                chosenCard[paires[i]].paired = true;
+            }
+            return 1;
+        }
+    }
+    return 0;
 }
 
 int checkPose(int pose){
@@ -145,7 +193,8 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
     int userInput,lastInput  = 0; //variable pour les inputs joueur
     int inGameTime ; //temps passé dans le jeu, il recupérer dans la fonction de calcul de temps.
     int userPosition = 0;//définie la postion de l'utilisateur dans les cartes
-    int numberOfPairs ;
+    int numberOfPairs = 0;
+    bool *inputDisable = false;
     bool victory = false ; //condition de victoire, ici mis en true par defaut pour debug le programme 
     bool forfait = false ;
 
@@ -183,25 +232,35 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
             lastInput = debug_input(userInput,lastInput,chronoBox) ;
             mvwprintw(chronoBox,2,1,"Input : %c",lastInput) ; //affiche le dernier input
         }
-        
-        switch(userInput) {
+        if(inputDisable == false) {
+            switch(userInput) {
             case 'q'  : //Quand q press, termine le jeu et applique une défaite
                 forfait = true ; //termine le do while grace a la variable de forfait du joueur.
                 break;
             case 'a' : //deplacement gauche
                 userPosition --;
+                while(testCarte[userPosition].paired == true) {
+                    userPosition --;
+                }
                 break;
             case 'z' : //deplacement droit
                 userPosition ++;
+                while(testCarte[userPosition].paired == true) {
+                    userPosition ++;
+                }
                 break;
             case 'e' : //sélection carte
                 testCarte[userPosition].selected = true ;
                 break;
+            }
         }
         userPosition = checkPose(userPosition);
-
-        
         cardStatusUpdate(testCarte,userPosition,debugMode);
-    } while ((inGameTime / 1000) < 120 && forfait != true && numberOfPairs < 6); //temps du chrono (dans la version final, on sera a 120s)
+        numberOfPairs += checkPaires(testCarte,inputDisable) ;
+
+        if(numberOfPairs == 6) {
+            victory = true;
+        }
+    } while ((inGameTime / 1000) < 120 && forfait != true && victory != true); //temps du chrono (dans la version final, on sera a 120s)
     after_game(victory,inGameTime) ; // lance la fenetre d'aprés jeu
 }
