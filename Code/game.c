@@ -17,7 +17,7 @@ typedef struct card { //structure qui gere le format des cartes (leur position, 
     WINDOW* windowCard; //fenetre de la carte
     char status ; //status de la carte
     char value ; // valeur de la carte
-    bool hover ;
+    bool selected ;
 }playcard;
 
 struct timeFormat SecondsAndMilliseconds(int time) { //fonction de mise a format du temps via la structures précédentes 
@@ -80,6 +80,7 @@ void definitionCard(playcard *carte) {
             carte[i].windowCard = newwin(7,9,position_y,position_x[i%6]) ;
             carte[i].status = 'h' ;
             carte[i].value = 'c' ;
+            carte[i].selected = false ;
     }
 }
 
@@ -104,17 +105,14 @@ void selectedCard(playcard chosenCard){
 
 void cardStatusUpdate(playcard *chosenCard,int userPosition, bool debugMode){
     for(int i=0;i < 12;i++){
-        if(chosenCard[i].status != 's' && chosenCard[i].status != 'g' && chosenCard[userPosition].hover != true){
+        if(chosenCard[i].status != 'g' || chosenCard[userPosition].status != 'o'){
             chosenCard[i].status = 'h';
         }
         if(i == userPosition){
-            chosenCard[userPosition].hover = true ;
+            chosenCard[userPosition].status = 'o' ;
         }
         switch (chosenCard[i].status) 
         {
-        case 's' :
-            selectedCard(chosenCard[i]) ;   
-            break;
         case 'o':
             onCard(chosenCard[i]);
             break;
@@ -122,6 +120,9 @@ void cardStatusUpdate(playcard *chosenCard,int userPosition, bool debugMode){
         case 'h':
             hiddenCard(chosenCard[i],debugMode);
             break;
+        }
+        if(chosenCard[i].selected == true) {
+            selectedCard(chosenCard[i]) ;
         }
     }
 }
@@ -144,6 +145,7 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
     int userInput,lastInput  = 0; //variable pour les inputs joueur
     int inGameTime ; //temps passé dans le jeu, il recupérer dans la fonction de calcul de temps.
     int userPosition = 0;//définie la postion de l'utilisateur dans les cartes
+    int numberOfPairs ;
     bool victory = false ; //condition de victoire, ici mis en true par defaut pour debug le programme 
     bool forfait = false ;
 
@@ -188,24 +190,18 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
                 break;
             case 'a' : //deplacement gauche
                 userPosition --;
-                while(testCarte[userPosition].status != 'h'){
-                    userPosition --;
-                }
                 break;
             case 'z' : //deplacement droit
                 userPosition ++;
-                while(testCarte[userPosition].status != 'h'){
-                    userPosition ++;
-                }
                 break;
             case 'e' : //sélection carte
-                testCarte[userPosition].status = 's' ;
+                testCarte[userPosition].selected = true ;
                 break;
         }
-
         userPosition = checkPose(userPosition);
 
+        
         cardStatusUpdate(testCarte,userPosition,debugMode);
-    } while ((inGameTime / 1000) < 120 && forfait != true); //temps du chrono (dans la version final, on sera a 120s)
+    } while ((inGameTime / 1000) < 120 && forfait != true && numberOfPairs < 6); //temps du chrono (dans la version final, on sera a 120s)
     after_game(victory,inGameTime) ; // lance la fenetre d'aprés jeu
 }
