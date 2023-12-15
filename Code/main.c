@@ -9,7 +9,7 @@
 
 #define TAILLE_T 50
 
-int main(int argc , char ** argv) {
+int main() {
 
     //initialisation de la fenetre
     initscr() ; 

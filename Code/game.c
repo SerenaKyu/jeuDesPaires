@@ -8,6 +8,9 @@
 
 #include "aftergame.h"
 
+static bool inputDisable = false;
+static int numberOfPairs = 0;
+
 struct timeFormat { //structure du format du temps
     int seconds ;
     int milliseconds ;
@@ -44,14 +47,14 @@ int affichage_temps(struct timeval start_time ,struct timeval current_time, WIND
 
     struct timeFormat format = SecondsAndMilliseconds(elapsed_time) ; //appel de la structure de format du temps
 
-    mvwprintw(myWindow,1,1,"Chrono  : %d.%ds", format.seconds,format.milliseconds); //affichage dans la fenetre du chrono
+    mvwprintw(myWindow,1,1,"chrono : %d.%ds", format.seconds,format.milliseconds); //affichage dans la fenetre du chrono
     wrefresh(myWindow) ; //refresh la fenetre pour afficher le temps du chrono actuel
 
     return elapsed_time ;
 }
 
 int debug_input(int input, int lastInput,WINDOW *myWindow) {  //affiche l'input entree par l'utilisateur
-    if (input !=  -1 || input != lastInput) { //affiche la derniere input entrer par l'utilisateur (features debug)
+    if (input !=  -1 && input != lastInput) { //affiche la derniere input entrer par l'utilisateur (features debug)
         lastInput = input ;
     }
     return lastInput ;
@@ -108,7 +111,8 @@ void pairedCard(playcard chosenCard) {
 
 void selectedCard(playcard chosenCard){
     wattron(chosenCard.windowCard,COLOR_PAIR(3)) ;
-    wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;
+    wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;    
+    mvwprintw(chosenCard.windowCard,3,4,"%d",chosenCard.value) ;
     wrefresh(chosenCard.windowCard) ;
 }   
 
@@ -132,42 +136,54 @@ void cardStatusUpdate(playcard *chosenCard,int userPosition, bool debugMode){
             break;
         }
 
+        if(chosenCard[i].selected == true) {
+            selectedCard(chosenCard[i]) ;
+        }
+
         if(chosenCard[i].paired == true) {
             pairedCard(chosenCard[i]) ;
         }
 
-        if(chosenCard[i].selected == true) {
-            selectedCard(chosenCard[i]) ;
-        }
     }
 }
 
-int checkPaires(playcard *chosenCard, bool *freezeInput) {
+int checkPaires(playcard *chosenCard,struct timeval start_time ,struct timeval current_time, WINDOW * myWindow) {
+    
+
     int paires[2] = {-1,-1};
+    int elapsed_time,start_break ;
 
     for(int i = 0; i < 12;i++){
         if(chosenCard[i].selected == true) {
             if(paires[0] == -1) {
                 paires[0] = i ;
+                selectedCard(chosenCard[i]) ;
             }
             else{
                 paires[1] = i ;
+                selectedCard(chosenCard[i]) ;
             }
         }
     }
 
     if(paires[0] != -1 && paires[1] != -1){
-        for(int i = 0 ; i < 2; i++){
-            hiddenCard(chosenCard[paires[i]],true);
+        inputDisable = true ;
+        start_break = affichage_temps(start_time,current_time,myWindow);
+        while ((elapsed_time / 1000) < (start_break / 1000) + 2){
+            gettimeofday(&current_time, NULL) ; // recupere la valeur a ce moment dans le timer
+            elapsed_time = affichage_temps(start_time,current_time,myWindow);
         }
-        napms(2000);
+        inputDisable = false;
+
         for(int i = 0 ; i < 2; i++){
             chosenCard[paires[i]].selected = false;
         }
+
         if(chosenCard[paires[0]].value == chosenCard[paires[1]].value) {
             for(int i = 0; i < 2; i++){
                 pairedCard(chosenCard[paires[0]]);
                 chosenCard[paires[i]].paired = true;
+                numberOfPairs++;
             }
             return 1;
         }
@@ -175,12 +191,18 @@ int checkPaires(playcard *chosenCard, bool *freezeInput) {
     return 0;
 }
 
-int checkPose(int pose){
+int checkPose(int pose,playcard *chosenCard){
     if(pose > 11) {
         pose = 0 ;
+        while(chosenCard[pose].paired == true) {
+               pose ++;
+            }   
         } 
     else if(pose < 0) {
         pose = 11 ;
+        while(chosenCard[pose].paired == true) {
+           pose --;
+        } 
     }
     return pose;
 }
@@ -193,8 +215,6 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
     int userInput,lastInput  = 0; //variable pour les inputs joueur
     int inGameTime ; //temps passé dans le jeu, il recupérer dans la fonction de calcul de temps.
     int userPosition = 0;//définie la postion de l'utilisateur dans les cartes
-    int numberOfPairs = 0;
-    bool *inputDisable = false;
     bool victory = false ; //condition de victoire, ici mis en true par defaut pour debug le programme 
     bool forfait = false ;
 
@@ -222,6 +242,10 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
     gettimeofday(&start_time, NULL) ; //recuperer la valeur de debut du chrono et du jeu
 
      do { //Lancement du jeu et du chrono
+        if(numberOfPairs == 12) {
+            victory = true;
+        }
+
         gettimeofday(&current_time, NULL) ; // recupere la valeur a ce moment dans le timer
 
         inGameTime = affichage_temps(start_time,current_time,chronoBox);
@@ -250,17 +274,15 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
                 }
                 break;
             case 'e' : //sélection carte
-                testCarte[userPosition].selected = true ;
+                if(testCarte[userPosition].paired == false) {
+                    testCarte[userPosition].selected = true ;
+                }
                 break;
             }
         }
-        userPosition = checkPose(userPosition);
+        userPosition = checkPose(userPosition,testCarte);
         cardStatusUpdate(testCarte,userPosition,debugMode);
-        numberOfPairs += checkPaires(testCarte,inputDisable) ;
-
-        if(numberOfPairs == 6) {
-            victory = true;
-        }
+        checkPaires(testCarte,start_time,current_time,chronoBox) ;
     } while ((inGameTime / 1000) < 120 && forfait != true && victory != true); //temps du chrono (dans la version final, on sera a 120s)
-    after_game(victory,inGameTime) ; // lance la fenetre d'aprés jeu
+    after_game(victory,inGameTime,debugMode) ; // lance la fenetre d'aprés jeu
 }

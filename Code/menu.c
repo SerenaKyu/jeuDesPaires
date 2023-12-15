@@ -87,7 +87,7 @@ void menuDebug() {
 
     mvwprintw(debugBox,1,1,"Bienvenue sur la fenetre de debug, merci de choisir une option") ;
     mvwprintw(debugBox,3,1,"1 - Lancer le jeu en mode debug") ;
-    mvwprintw(debugBox,4,1,"2 - Renitialiser les scores") ; 
+    mvwprintw(debugBox,4,1,"2 - Reinitialiser les scores") ; 
 
     mvwgetnstr(debugBox, 6, 1 , debugChoice,1) ;
 

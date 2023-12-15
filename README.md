@@ -44,8 +44,10 @@ gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c -lncurses
 
 - ##### Liste des commandes utilisateur possible dans le programme :
 
-    - **q** = Mettre fin au jeu.
-    - ****
+    - **q** : Mettre fin au jeu.
+    - **z** : Se déplacer vers la droite
+    - **a** : Se déplacer vers la gauche
+    - **e** : Séléctionner la cartes
 
 ---
 
@@ -53,7 +55,7 @@ gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c -lncurses
 
 Voici notre avancement actuelle sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v0.4.4*
+*Version actuelle du jeu : v0.5*
 
 > **Légende :**
 >
@@ -68,13 +70,13 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 |Test résolution Terminal  |:white_check_mark:        |**v0.1**|
 |Lancement jeu 1 joueur    |:white_check_mark:        |**v0.2**|
 |Lancement jeu Autoplay    |:x:                       |        |
-|Motif déco cartes         |:x:                       |        |
+|Motif déco cartes         |:eight_pointed_black_star:|        |
 |Défini Aléatoire cartes   |:eight_pointed_black_star:|        |
 |Gestion des inputs jeu    |:white_check_mark:        |**v0.3**|
-|Choix de la carte jeu     |:eight_pointed_black_star:|        |
+|Choix de la carte jeu     |:white_check_mark:        |**v0.5**|
 |Chronomètre               |:white_check_mark:        |**v0.2**|
-|Comparaison des cartes    |:eight_pointed_black_star:|        |
-|Couleur des cartes status |:eight_pointed_black_star:|        |
+|Comparaison des cartes    |:white_check_mark:        |**v0.5**|
+|Couleur des cartes status |:white_check_mark:        |**v0.5**|
 |Ecriture highscore        |:white_check_mark:        |**v0.4**|
 |Highscores stockage       |:white_check_mark:        |**v0.4**|
 |Temps écoulée             |:white_check_mark:        |**v0.2**|
@@ -85,7 +87,7 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 
 - ### PatchNotes :bookmark_tabs:
 
-*Version actuelle du jeu : v0.4.4*
+*Version actuelle du jeu : v0.5*
 
 - ###### v0.4.4 :
 > - déplacement des features d'aprés jeu dans `aftergame.c`
