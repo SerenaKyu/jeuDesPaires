@@ -12,16 +12,16 @@ Le programme est seulement disponible sur n'importe quel distribution **Linux.:p
 
 ##### 1. Installer la librairie ncurses sur votre machine:blue_book: 
 
-- Ce programme fonctionne grace à la librairie ncurses, il faut donc la telecharger à l'avance(:link:[Fiche d'aide sur l'installation de ncurses pour les distribution les plus populaires.](https://www.cyberciti.biz/faq/linux-install-ncurses-library-headers-on-debian-ubuntu-centos-fedora/?__cf_chl_tk=rluPuC6Rq0fQWuxExTTKQpOTJpms0k3zLRHfU842vQY-1700225221-0-gaNycGzNDqU))
+- Ce programme fonctionne grace à la librairie ncurses, il faut donc la telecharger à l'avance(:page_facing_up:[Fiche d'aide sur l'installation de ncurses pour les distribution les plus populaires.](https://www.cyberciti.biz/faq/linux-install-ncurses-library-headers-on-debian-ubuntu-centos-fedora/?__cf_chl_tk=rluPuC6Rq0fQWuxExTTKQpOTJpms0k3zLRHfU842vQY-1700225221-0-gaNycGzNDqU))
 
 ##### 2. Téléchager les fichier sources du programme sur votre ordinateur :floppy_disk: 
 
-- Cloner le repository (:link:[Fiche d'aide pour cloner un repository](https://docs.github.com/fr/repositories/creating-and-managing-repositories/cloning-a-repository))
+- Cloner le repository (:page_facing_up:[Fiche d'aide pour cloner un repository](https://docs.github.com/fr/repositories/creating-and-managing-repositories/cloning-a-repository))
 - Ou télécharger le manuellement en haut de la page avec le boutton vert "Code"
 
 ##### 3. Compiler le code et lancer le dans le terminal :minidisc:
 
-- Pour compiler le code, verifier que vous possedée GCC GNU sur votre machine (:link:[Lien pour installer GCC GNU](https://doc.ubuntu-fr.org/gcc))
+- Pour compiler le code, verifier que vous possedée GCC GNU sur votre machine (:arrow_down:[Lien pour installer GCC GNU](https://doc.ubuntu-fr.org/gcc))
 
 - Pour compiler le code de maniere simple et lancer le jeu il faut :
 
@@ -32,7 +32,7 @@ Le programme est seulement disponible sur n'importe quel distribution **Linux.:p
 ```
 cd jeuDesPaires/Output
 
-gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c -lncurses
+gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c ../Code/aftergame.c -lncurses
 
 ./a.out
 ```
@@ -44,8 +44,10 @@ gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c -lncurses
 
 - ##### Liste des commandes utilisateur possible dans le programme :
 
-    - **q** = Mettre fin au jeu.
-    - ****
+    - **q** : Mettre fin au jeu.
+    - **z** : Se déplacer vers la droite
+    - **a** : Se déplacer vers la gauche
+    - **e** : Séléctionner la cartes
 
 ---
 
@@ -53,7 +55,7 @@ gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c -lncurses
 
 Voici notre avancement actuelle sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v0.4.4*
+*Version actuelle du jeu : v0.5*
 
 > **Légende :**
 >
@@ -68,24 +70,35 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 |Test résolution Terminal  |:white_check_mark:        |**v0.1**|
 |Lancement jeu 1 joueur    |:white_check_mark:        |**v0.2**|
 |Lancement jeu Autoplay    |:x:                       |        |
-|Motif déco cartes         |:x:                       |        |
-|Défini Aléatoire cartes   |:eight_pointed_black_star:|        |
+|Motif décoratif cartes    |:eight_pointed_black_star:|        |
+|Cartes aléatoires         |:eight_pointed_black_star:|        |
 |Gestion des inputs jeu    |:white_check_mark:        |**v0.3**|
-|Choix de la carte jeu     |:eight_pointed_black_star:|        |
+|Choix de la carte jeu     |:white_check_mark:        |**v0.5**|
 |Chronomètre               |:white_check_mark:        |**v0.2**|
-|Comparaison des cartes    |:eight_pointed_black_star:|        |
-|Couleur des cartes status |:eight_pointed_black_star:|        |
+|Comparaison des cartes    |:white_check_mark:        |**v0.5**|
+|Couleur des cartes status |:white_check_mark:        |**v0.5**|
 |Ecriture highscore        |:white_check_mark:        |**v0.4**|
 |Highscores stockage       |:white_check_mark:        |**v0.4**|
 |Temps écoulée             |:white_check_mark:        |**v0.2**|
 |Décision auto play        |:x:                       |        |
 |SiteWeb                   |:x:                       |        |
+|Portage Windows           |:x:                       |        |
 
 ---
 
 - ### PatchNotes :bookmark_tabs:
 
-*Version actuelle du jeu : v0.4.4*
+*Version actuelle du jeu : v0.5*
+
+- ##### v0.5 : 
+> - Implémentation des features suivantes :
+>   - Affichages des 12 cartes intétegré
+>   - Controle de déplacement et de séléction des cartes
+>   - Gestion des différents status des cartes
+>   - Algorythme de comparaison des cartes
+>   - Condition de victoire
+> - Correction d'un Bug de compilation qui faisait que les fichiers .o ne trouvais pas leur dossier.
+> - Correction d'un Bug qui faisait que le programme ne conservais pas réellement la derniere input pour le mode Debug.
 
 - ###### v0.4.4 :
 > - déplacement des features d'aprés jeu dans `aftergame.c`
