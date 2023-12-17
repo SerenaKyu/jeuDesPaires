@@ -76,9 +76,18 @@ void hiddenCard(playcard chosenCard , bool debugMode) {
 void definitionCard(playcard *carte) {
     int position_x[6] = {1,11,21,31,41,51} ;
     int position_y = 5;
+    int valeurRand, temp ;
     int cardValue[12] = {'A','A','B','B','C','C','D','D','E','E','F','F'} ;
 
     srand(time(NULL));
+
+    for(int i = 0 ; i < 12;i++) {
+        valeurRand = rand() % 12 ;
+
+        temp = cardValue[i] ;
+        cardValue[i] = cardValue[valeurRand] ;
+        cardValue[valeurRand] = temp ;
+    }
 
     for(int i = 0 ; i < 12 ;i++) {
             if(i == 6) {
