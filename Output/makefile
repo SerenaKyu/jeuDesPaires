@@ -1,5 +1,5 @@
-a.out : ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o ../Code/ObjectFile/game.o ../Code/ObjectFile/aftergame.o
-	gcc -o a.out ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o ../Code/ObjectFile/game.o ../Code/ObjectFile/aftergame.o -lncurses
+game.exe : ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o ../Code/ObjectFile/game.o ../Code/ObjectFile/aftergame.o
+	gcc -o game.exe ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o ../Code/ObjectFile/game.o ../Code/ObjectFile/aftergame.o -lncurses
 
 ../Code/ObjectFile/main.o : ../Code/main.c
 	gcc -c -Wall ../Code/main.c -o ../Code/ObjectFile/main.o
@@ -14,4 +14,4 @@ a.out : ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o ../Code/ObjectFile/g
 	gcc -c -Wall ../Code/game.c -o ../Code/ObjectFile/game.o
 
 clean :
-	rm -f ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o ../Code/ObjectFile/game.o ../Code/ObjectFile/aftergame.o a.out
+	rm -f ../Code/ObjectFile/main.o ../Code/ObjectFile/menu.o ../Code/ObjectFile/game.o ../Code/ObjectFile/aftergame.o game.exe
