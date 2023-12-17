@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <sys/time.h> //librarie pour utiliser le chrono
+#include <time.h>
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -64,7 +65,7 @@ void hiddenCard(playcard chosenCard , bool debugMode) {
     wattron(chosenCard.windowCard,COLOR_PAIR(1)) ;
     wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;
     if(debugMode == true) {
-        mvwprintw(chosenCard.windowCard,3,4,"%d",chosenCard.value) ;
+        mvwprintw(chosenCard.windowCard,3,4,"%c",chosenCard.value) ;
     }
     else{
         mvwprintw(chosenCard.windowCard,3,4," ") ; 
@@ -73,9 +74,11 @@ void hiddenCard(playcard chosenCard , bool debugMode) {
 }
 
 void definitionCard(playcard *carte) {
-
     int position_x[6] = {1,11,21,31,41,51} ;
     int position_y = 5;
+    int cardValue[12] = {'A','A','B','B','C','C','D','D','E','E','F','F'} ;
+
+    srand(time(NULL));
 
     for(int i = 0 ; i < 12 ;i++) {
             if(i == 6) {
@@ -83,7 +86,7 @@ void definitionCard(playcard *carte) {
             }
             carte[i].windowCard = newwin(7,9,position_y,position_x[i%6]) ;
             carte[i].status = 'h' ;
-            carte[i].value = 1 ;
+            carte[i].value = cardValue[i] ;
             carte[i].selected = false ;
             carte[i].paired = false ;
     }
@@ -105,14 +108,14 @@ void onCard(playcard chosenCard) {
 void pairedCard(playcard chosenCard) {
     wattron(chosenCard.windowCard,COLOR_PAIR(1)) ;
     wborder(chosenCard.windowCard,'|','|','-','-','0','0','0','0') ;
-    mvwprintw(chosenCard.windowCard,3,4,"%d",chosenCard.value) ;
+    mvwprintw(chosenCard.windowCard,3,4,"%c",chosenCard.value) ;
     wrefresh(chosenCard.windowCard) ;
 }
 
 void selectedCard(playcard chosenCard){
     wattron(chosenCard.windowCard,COLOR_PAIR(3)) ;
     wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;    
-    mvwprintw(chosenCard.windowCard,3,4,"%d",chosenCard.value) ;
+    mvwprintw(chosenCard.windowCard,3,4,"%c",chosenCard.value) ;
     wrefresh(chosenCard.windowCard) ;
 }   
 
@@ -169,6 +172,7 @@ int checkPaires(playcard *chosenCard,struct timeval start_time ,struct timeval c
     if(paires[0] != -1 && paires[1] != -1){
         inputDisable = true ;
         start_break = affichage_temps(start_time,current_time,myWindow);
+
         while ((elapsed_time / 1000) < (start_break / 1000) + 2){
             gettimeofday(&current_time, NULL) ; // recupere la valeur a ce moment dans le timer
             elapsed_time = affichage_temps(start_time,current_time,myWindow);
@@ -181,11 +185,17 @@ int checkPaires(playcard *chosenCard,struct timeval start_time ,struct timeval c
 
         if(chosenCard[paires[0]].value == chosenCard[paires[1]].value) {
             for(int i = 0; i < 2; i++){
-                pairedCard(chosenCard[paires[0]]);
+                pairedCard(chosenCard[paires[i]]);
                 chosenCard[paires[i]].paired = true;
                 numberOfPairs++;
             }
             return 1;
+        }
+        
+        else{
+            for(int i = 0;i < 2;i++){
+                hiddenCard(chosenCard[paires[i]],false) ;
+            }
         }
     }
     return 0;
@@ -254,7 +264,7 @@ void game_1player(bool debugMode) { //fonction du jeu à 1 joueur
 
         if(debugMode == true) {
             lastInput = debug_input(userInput,lastInput,chronoBox) ;
-            mvwprintw(chronoBox,2,1,"Input : %c",lastInput) ; //affiche le dernier input
+            mvwprintw(chronoBox,2,1,"Input : %c  ",lastInput) ; //affiche le dernier input
         }
         if(inputDisable == false) {
             switch(userInput) {
