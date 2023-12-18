@@ -75,7 +75,7 @@ void gestion_classement(int time, WINDOW *myWindow,bool victory) {
     curs_set(1) ; // Réaffiche le curseur
     echo() ; // Réactive l'affichage des input entrés par l'utilisateur
 
-    highscore = fopen("../Data/jeuhighscore.txt", "r"); // Ouverture du fichier en mode lecture
+    highscore = fopen("../../Data/jeuhighscore.txt", "r"); // Ouverture du fichier en mode lecture
 
     if(highscore == NULL){ // Vérifie si le fichier jeuhighscore.txt a bien été ouvert
         endwin() ;
@@ -120,8 +120,9 @@ void gestion_classement(int time, WINDOW *myWindow,bool victory) {
 
         affichage_scores(scorelist,myWindow) ; // Affiche les scores
     
+
         if(victory == true) { // Réécrit le fichier si le joueur a gagné 
-            highscore = fopen("../Data/jeuhighscore.txt", "w"); // Ouvre le fichier en mode écriture
+            highscore = fopen("../../Data/jeuhighscore.txt", "w"); // Ouvre le fichier en mode écriture
             ecriture_scores(scorelist,highscore);
             fclose(highscore);
         }

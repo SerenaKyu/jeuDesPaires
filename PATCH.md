@@ -1,6 +1,12 @@
 - ### PatchNotes :bookmark_tabs:
 
-*Version actuelle du jeu : v1.0*
+*Version actuelle du jeu : v1.0.1*
+
+- ###### v1.0.2 :
+> - Correction d'un bug qui rendais la réinitialisation du fichier des scores impossible 
+
+- ###### v1.0.1 :
+> - Correction d'un bug qui rendais la lecture et ecriture du classement impossible
 
 - #### v1.0 :
 > - Jeu à 1 joueur totalement fonctionnel et implémenté.
