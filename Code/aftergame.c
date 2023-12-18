@@ -91,7 +91,7 @@ void gestion_classement(int time, WINDOW *myWindow,bool victory) {
             while (strlen(username) < 4) // Demande au joueur d'entrer son nom. Si le nom est trop petit, le programme va lui redemander.
             {
                 mvwprintw(myWindow,4,1,"Veuillez choisir un nom à 4 lettre pour enregistrer le score :      ") ;
-                mvwgetnstr(myWindow, 4, 62 , username,4) ; //recupere le choix de l'utilisateur
+                mvwgetnstr(myWindow, 4, 64 , username,4) ; //recupere le choix de l'utilisateur
                 if(strlen(username) < 4) { // Affiche un message si le pseudo est incorrect
                     mvwprintw(myWindow,2,1,"NOM INCORRECT, VEUILLEZ ENTRER UN NOM À 4 LETTRES") ;
                 }
