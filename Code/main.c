@@ -3,73 +3,73 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-#include "menu.h" //Permets de gerer l'affichage de l'ecran titre et des différentes
-                 // erreures
-#include "game.h"//Permets de gerer le jeu
+#include "menu.h" // Permet de gérer l'affichage de l'écran titre et des différentes erreurs
+#include "game.h"// Permet de gérer le jeu
 
 #define TAILLE_T 50
 
+/*
+Fonction : main
+Traitement : Affiche le menu de démarrage et demande un choix de mode de jeu à l'utilisateur (1 joueur, autoplay, mode debug...)
+Retour : Une fonction main retourne 0 par défaut
+*/
 int main() {
 
-    //initialisation de la fenetre
-    initscr() ; 
+    initscr() ; // Initialisation de la fenêtre
 
-    //initialisation des variables de configuration de la boite du menu
-    int height, width, start_x, start_y ,cols,rows;
-    height = 30 ; //definition de la longeur de la boite
-    width = 100 ; //definition de la largeur de la boite
-    start_x = start_y = 0 ; //definition des variables de deplacement 
+    int height, width, start_x, start_y ,cols,rows; // Initialisation des variables de configuration de la boîte du menu
+    height = 30 ; // Définition de la longueur de la boîte
+    width = 100 ; // Définition de la largeur de la boîte
+    start_x = start_y = 0 ; // Définition des variables de déplacement 
 
-    char userGamemodeChoice[TAILLE_T]; //chaine de charactere qui permet de recup le choix de mode de l'utilisateur
+    char userGamemodeChoice[TAILLE_T]; // Chaîne de caractères qui permet de récupérer le choix de mode de l'utilisateur
 
-    WINDOW *menuBox = newwin(height,width,start_y,start_x) ; //definition de la taille de la fenetre 
+    WINDOW *menuBox = newwin(height,width,start_y,start_x) ; // Définition de la taille de la fenêtre 
 
-    nodelay(stdscr,TRUE); //enleve le delay de refresh de la window
-    getmaxyx(stdscr, rows, cols); //recupere la taille du terminal
+    nodelay(stdscr,TRUE); // N'attend pas pour effectuer un while
+    getmaxyx(stdscr, rows, cols); // Récupere la taille du terminal
 
     refresh() ;
 
-    if(rows < 30 || cols < 100) { //code permetant de stopper le programme 
-                                 // si le terminal n'as pas les bonne dimension
-
-        erreur10(rows,cols); //affichage du retours erreur avec des information 
-        return 0 ;          //supplémentaire comme la taille du terminal
+    if(rows < 30 || cols < 100) { // Code permetant de stopper le programme si le terminal n'a pas les bonnes dimensions
+        erreur10(rows,cols); // Affichage du retour erreur avec des informations supplémentaires, comme la taille du terminal
+        return 0 ;
     }
 
-    box(menuBox,0,0) ; //affiche la boite
+    box(menuBox,0,0) ; // Affiche la boîte
     wrefresh(menuBox) ; 
 
-    affiche_titre(menuBox) ; //affiche le titre + option de l'écran d'acceuille
+    affiche_titre(menuBox) ; // Affiche le titre et les options de l'écran d'accueil
     affiche_option(menuBox) ;
-    wrefresh(menuBox) ; //il faut refresh a chaque changement de valeur btw
+    wrefresh(menuBox) ; // Rafraîchi à chaque changement de valeurs
 
-    mvwgetnstr(menuBox, 17, 40 , userGamemodeChoice,1) ; //recupere le choix de l'utilisateur
+    mvwgetnstr(menuBox, 17, 40 , userGamemodeChoice,1) ; // Récupère le choix de l'utilisateur
     wrefresh(menuBox) ;
 
-    switch (userGamemodeChoice[0]) //permet de decider le mode choisie par l'utilisateur
+    switch (userGamemodeChoice[0]) // Permet de décider le mode choisi par l'utilisateur
     {
-    case '1': //Mode 1 joueur
-        wclear(menuBox) ; //eneleve l'affichage de l'ecran titre
-        wrefresh(menuBox) ; //refresh aprés l'avoir enlever pour pouvoir la mettre a jour
+    case '1': // Mode 1 joueur
+        wclear(menuBox) ; // Enlève l'affichage de l'écran titre
+        wrefresh(menuBox) ; // Refresh après l'avoir enlevé pour pouvoir la mettre à jour
 
-        game_1player(false) ; //Debut du jeu à 1 joueur
+        game_1player(false) ; // Début du jeu à 1 joueur
         break;
-    case '2' : //Autoplay
+    case '2' : // Autoplay
         mvwprintw(menuBox,17,4,"Mode AutoPlay") ;
         break ; 
     case '3'  :
-        wclear(menuBox) ; //eneleve l'affichage de l'ecran titre
-        wrefresh(menuBox) ; //refresh aprés l'avoir enlever pour pouvoir la mettre a jour
+        wclear(menuBox) ; // Enlève l'affichage de l'écran titre
+        wrefresh(menuBox) ; // Refresh après l'avoir enlevé pour pouvoir la mettre à jour
 
-        menuDebug() ; //Debut du jeu à 1 joueur
+        menuDebug() ; // Début du jeu à 1 joueur
         break;
-    default: //Affichage de l'erreur d'entrée utilisateur (erreur 11)
+    default: // Affichage de l'erreur d'entrée utilisateur (erreur 11)
         erreur11() ;
         return 0 ;
     }
 
-    getch(); //recuperer l'input pour finir le programme main
-    endwin() ; //fin de du processus ncruses 
+    getch(); // Récupère l'input pour finir la fonction main
+    endwin() ; // Fin du processus ncurses
 
     return 0 ; 
 
