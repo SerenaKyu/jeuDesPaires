@@ -53,7 +53,7 @@ gcc -c game.exe ../../Code/ObjectFile/main.c ../../Code/ObjectFile/menu.c ../../
 
 Voici notre avancement actuel sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v1.0*
+*Version actuelle du jeu : v1.0.1*
 
 > **Légende :**
 >
@@ -90,7 +90,5 @@ Accédez à tous les patchnotes :page_facing_up:[Liste complète](./PATCH.md)
 
 **Dernier Patch :**
 
-- #### v1.0 :
-> - Jeu à 1 joueur totalement fonctionnel et implémenté.
-> - Changement de la stucture du projet :
->  - Les patch sont desormais déplacés dans un autre fichier.
+- ###### v1.0.1 :
+> - Correction d'un bug qui rendais la lecture et ecriture du classement impossible
