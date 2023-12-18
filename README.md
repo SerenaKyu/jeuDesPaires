@@ -90,5 +90,5 @@ Accédez à tous les patchnotes :page_facing_up:[Liste complète](./PATCH.md)
 
 **Dernier Patch :**
 
-- ###### v1.0.1 :
-> - Correction d'un bug qui rendais la lecture et ecriture du classement impossible
+- ###### v1.0.2 :
+> - Correction d'un bug qui rendais la réinitialisation du fichier des scores impossible 
