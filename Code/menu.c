@@ -43,7 +43,7 @@ void affiche_option(WINDOW * myWindow) { //permet d'afficher les options disponi
 void reset_score() {
     FILE* highscore ;
 
-    highscore = fopen("../Data/jeuhighscore.txt", "w");
+    highscore = fopen("../../Data/jeuhighscore.txt", "w");
 
     if(highscore == NULL){ // Vérifie si le fichier jeuhighscore.txt a bien été ouvert
         printf("Erreur lors de l'écriture du fichiers des scores");
