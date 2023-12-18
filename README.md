@@ -90,7 +90,5 @@ Acceder à tous les patchnotes :page_facing_up:[Liste complètes](./PATCH.md)
 
 **Dernier Patch :**
 
-- #### v1.0 :
-> - Jeu à 1 joueur totalement fonctionnel et implémenté.
-> - Changement de la structures de la stucture du projet :
->   - Les patch sont desormais déplacé dans un autres fichier
+- ###### v1.0.1 :
+> - Correction d'un bug qui rendais la lecture et ecriture du classement impossible
