@@ -1,6 +1,11 @@
 - ### PatchNotes :bookmark_tabs:
 
-*Version actuelle du jeu : v1.0.1*
+*Version actuelle du jeu : v1.1*
+
+- ##### v1.1 :
+> - Implémentation des features suivantes :
+>   - mode autoplay
+> - Correction d'un bug graphique mineur
 
 - ###### v1.0.2 :
 > - Correction d'un bug qui rendais la réinitialisation du fichier des scores impossible 

@@ -374,7 +374,7 @@ void game_1player(bool debugMode) { // Fonction du jeu à 1 joueur
         userPosition = checkPose(userPosition,cardDeck); // Recalcule la position pour éviter que le joueur sorte de l'écran
         cardStatusUpdate(cardDeck,userPosition,debugMode); // Update le status des cartes (couleur)
         checkPaires(cardDeck,start_time,current_time,chronoBox) ; // Vérifie si deux cartes sont sélectionnées et paires
-    } while ((inGameTime / 1000) < 120 && forfait != true && victory != true); // Tant que le joueur n'a pas réussi, abandonné, ou atteint la limite de temps de 120 secondes, on continue le sélection de cartes
+    } while ((inGameTime / 1000) < 120 && forfait != true && victory != true); // Tant que le joueur n'a pas réussi, abandonné, ou atteint la limite de temps de 120 secondes, on continue la sélection de cartes
     after_game(victory,inGameTime) ; // Lance la fenêtre d'après jeu
 }
 
@@ -389,7 +389,7 @@ void game_autoplay() { // Fonction du jeu à 1 joueur
 
     int userInput; // Variable pour les inputs joueur (dans ce cass, quitter le mode autoplay)
     int inGameTime ; // Temps passé dans le jeu, récupéré dans la fonction de calcul de temps
-    int botCard ;// Défini la postion du robot dans les cartes 
+    int botPosition ;// Défini la postion du robot dans les cartes 
     bool victory = false ; // Condition de victoire, ici mit en true par défaut pour debug le programme 
     bool forfait = false ;
 
@@ -430,20 +430,21 @@ void game_autoplay() { // Fonction du jeu à 1 joueur
 
         userInput = getch(); // Récupère l'input utilisateur pour commander le jeu
 
-        botCard = rand() % 16 ;
-        while(cardDeck[botCard].paired == true) { // Décale la position si la carte est paire
-            botCard ++;
+        botPosition = rand() % 16 ; //recupere un nombre aleatoire entre 0 et 15 
+        while(cardDeck[botPosition].paired == true) { // Décale la position si la carte est paire
+            botPosition ++;
         }
-        botCard = checkPose(botCard,cardDeck); // Recalcule la position pour éviter que le joueur sorte de l'écran
-        if(cardDeck[botCard].paired == false) { // Permet de ne pas sélectionner une carte déjà pairée
-            cardDeck[botCard].selected = true ;
+        botPosition = checkPose(botPosition,cardDeck); // Recalcule la position pour éviter que le bot sorte de l'écran
+
+        if(cardDeck[botPosition].paired == false) { // Permet de ne pas sélectionner une carte déjà pairée
+            cardDeck[botPosition].selected = true ;
         }
 
-        if(userInput == 'q') {
+        if(userInput == 'q') { //arret forcée du jeu ordinateur
             break;
         }
-        cardStatusUpdate(cardDeck,botCard,false); // Update le status des cartes (couleur)
+        cardStatusUpdate(cardDeck,botPosition,false); // Update le status des cartes (couleur)
         checkPaires(cardDeck,start_time,current_time,chronoBox) ; // Vérifie si deux cartes sont sélectionnées et paires
-    } while ((inGameTime / 1000) < 120 && forfait != true && victory != true); // Tant que le joueur n'a pas réussi, abandonné, ou atteint la limite de temps de 120 secondes, on continue le sélection de cartes
+    } while ((inGameTime / 1000) < 120 && forfait != true && victory != true); // Tant que le bot n'a pas réussi, abandonné, ou atteint la limite de temps de 120 secondes, on continue la sélection de cartes
     after_game_autoplay(victory,inGameTime) ; // Lance la fenêtre d'après jeu
 } 

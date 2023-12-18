@@ -53,7 +53,7 @@ gcc -c game.exe ../../Code/ObjectFile/main.c ../../Code/ObjectFile/menu.c ../../
 
 Voici notre avancement actuel sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v1.0.1*
+*Version actuelle du jeu : v1.1*
 
 > **Légende :**
 >
@@ -67,8 +67,7 @@ Voici notre avancement actuel sur le projet, ce qui reste à faire et à implém
 |Sélection du mode de jeu  |:white_check_mark:        |**v0.1**|
 |Test résolution Terminal  |:white_check_mark:        |**v0.1**|
 |Lancement jeu 1 joueur    |:white_check_mark:        |**v0.2**|
-|Lancement jeu AutoPlay    |:x:                       |        |
-|Motifs décoratifs cartes  |:eight_pointed_black_star:|        |
+|Lancement jeu AutoPlay    |:white_check_mark:        |**v1.1**|
 |Cartes aléatoires         |:white_check_mark:        |**v1.0**|
 |Gestion des inputs jeu    |:white_check_mark:        |**v0.3**|
 |Choix de la carte jeu     |:white_check_mark:        |**v0.5**|
@@ -78,7 +77,7 @@ Voici notre avancement actuel sur le projet, ce qui reste à faire et à implém
 |Écriture highscore        |:white_check_mark:        |**v0.4**|
 |Highscores stockage       |:white_check_mark:        |**v0.4**|
 |Temps écoulé              |:white_check_mark:        |**v0.2**|
-|Décision AutoPlay         |:x:                       |        |
+|Décision AutoPlay         |:white_check_mark:        |**v1.1**|
 |Site Web                  |:x:                       |        |
 |Portage Windows           |:x:                       |        |
 
@@ -90,5 +89,7 @@ Accédez à tous les patchnotes :page_facing_up:[Liste complète](./PATCH.md)
 
 **Dernier Patch :**
 
-- ###### v1.0.2 :
-> - Correction d'un bug qui rendais la réinitialisation du fichier des scores impossible 
+- ##### v1.1 :
+> - Implémentation des features suivantes :
+>   - mode autoplay
+> - Correction d'un bug graphique mineur
