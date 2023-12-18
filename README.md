@@ -8,7 +8,7 @@
 
  - ### Installation, Compilation & OS disponible :arrow_down:
 
-Le programme est disponible sur n'importe quelle distribution **Linux.:penguin:**. Pour compiler le code, vous aurez besoin de :
+Le programme est disponible sur n'importe quelle distribution **Linux. :penguin:**. Pour compiler le code, vous aurez besoin de :
 
 ##### 1. Installer la librairie ncurses sur votre machine :blue_book: 
 
