@@ -30,11 +30,9 @@ Le programme est seulement disponible sur n'importe quel distribution **Linux.:p
     3. le fichier de lancement sera alors disponible et pret a lancer via la commande```./a.out``` pour y jouer
 - Vous pouvez aussi le compiler directement sans passer par un makefile déja présent : 
 ```
-cd jeuDesPaires/Output
+gcc -c game.exe ../../Code/ObjectFile/main.c ../../Code/ObjectFile/menu.c ../../Code/ObjectFile/game.c ../../Code/ObjectFile/aftergame.c -lncurses
 
-gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c ../Code/aftergame.c -lncurses
-
-./a.out
+./game.exe
 ```
 > *il est quand meme préférable de passer par le makefile présent dans le dossier Output*
 
@@ -55,7 +53,7 @@ gcc -o a.out ../Code/main.c ../Code/menu.c ../Code/game.c ../Code/aftergame.c -l
 
 Voici notre avancement actuelle sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v0.5*
+*Version actuelle du jeu : v1.0*
 
 > **Légende :**
 >
@@ -71,7 +69,7 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 |Lancement jeu 1 joueur    |:white_check_mark:        |**v0.2**|
 |Lancement jeu Autoplay    |:x:                       |        |
 |Motif décoratif cartes    |:eight_pointed_black_star:|        |
-|Cartes aléatoires         |:eight_pointed_black_star:|        |
+|Cartes aléatoires         |:white_check_mark:        |**v1.0**|
 |Gestion des inputs jeu    |:white_check_mark:        |**v0.3**|
 |Choix de la carte jeu     |:white_check_mark:        |**v0.5**|
 |Chronomètre               |:white_check_mark:        |**v0.2**|
@@ -88,7 +86,7 @@ Voici notre avancement actuelle sur le projet, ce qui reste à faire et à impl�
 
 - ### PatchNotes :bookmark_tabs:
 
-*Version actuelle du jeu : v0.5*
+*Version actuelle du jeu : v1.0*
 
 - ##### v0.5 : 
 > - Implémentation des features suivantes :
