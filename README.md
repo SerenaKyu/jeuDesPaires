@@ -53,7 +53,7 @@ gcc -c game.exe ../../Code/ObjectFile/main.c ../../Code/ObjectFile/menu.c ../../
 
 Voici notre avancement actuelle sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v1.0*
+*Version actuelle du jeu : v1.0.1*
 
 > **Légende :**
 >
