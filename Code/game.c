@@ -110,9 +110,15 @@ void printCard(playcard *carte, bool debugMode) { //definie et affiche toute les
     }
 }
 
-void onCard(playcard chosenCard) { //si le joueur est dessus la carte, elle est verte
+void onCard(playcard chosenCard,bool debugMode) { //si le joueur est dessus la carte, elle est verte
     wattron(chosenCard.windowCard,COLOR_PAIR(2)) ;
     wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;
+    if(debugMode == true) { //si le debug mode est on, affiche la valeur
+        mvwprintw(chosenCard.windowCard,3,4,"%c",chosenCard.value) ;
+    }
+    else{
+        mvwprintw(chosenCard.windowCard,3,4," ") ; //sinon affiche rien
+    }
     wrefresh(chosenCard.windowCard) ;
 }
 
@@ -137,14 +143,14 @@ void cardStatusUpdate(playcard *chosenCard,int userPosition, bool debugMode){ //
             chosenCard[i].status = 'h'; 
         }
 
-        if(i == userPosition){ // si la carte paroucus = la carte ou est le joueur, alors son status = o
+        if(i == userPosition){ // si la carte parcourue = la carte ou est le joueur, alors son status = o
             chosenCard[userPosition].status = 'o' ;
         }
 
         switch (chosenCard[i].status) // switch qui vas update le status de la cartes selon son status 
         {
         case 'o':
-            onCard(chosenCard[i]); //affiche la carte en vert 
+            onCard(chosenCard[i],debugMode); //affiche la carte en vert 
             break;
         case 'h':
             hiddenCard(chosenCard[i],debugMode); //affiche la carte en mode cachee et selon le debug mode on ou pas
@@ -166,6 +172,7 @@ void checkPaires(playcard *chosenCard,struct timeval start_time ,struct timeval 
     
     int paires[2] = {-1,-1}; //liste qui va enregistrer les 2 indicices des carte selectionee
     int elapsed_time,start_break ;
+
 
     for(int i = 0; i < 12;i++){ //vas parcourrir toute les cartes pour lire leur status
         if(chosenCard[i].selected == true) { //si la cartes est selectionner alors on vas chercher a l'ajouter dans la liste des paires
