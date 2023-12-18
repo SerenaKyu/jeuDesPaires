@@ -166,3 +166,37 @@ void after_game(bool victory, int time){
         }
     }
 }
+
+/*
+Fonction : after_game
+Param : victory correspond à un booléen permettant de récupérer si le joueur a gagné ou non, time permet de récupéré le temps effectué par le joueur
+Traitement : Si le joueur a gagné, va afficher un message de victoire avec le temps effectué par le joueur, puis va ensuite enregistrer le score du joueur. Sinon, affiche simplement les meilleurs scores.
+*/
+void after_game_autoplay(bool victory,int time){
+    int userInput ; // Récupère un input qui permettra de fermer le jeu
+
+    struct timeFormat format = SecondsAndMilliseconds(time) ; // Appel de la structure de format du temps
+
+    WINDOW *afterGameBox = newwin(8,100,22,0); // Fenêtre de victoire
+
+    box(afterGameBox,0,0) ; // Affiche les bordure dans la fenêtre d'après jeu
+
+    if(victory == true) {
+        mvwprintw(afterGameBox,1,1,"VICTOIRE") ; 
+        mvwprintw(afterGameBox,2,1,"Le robot à mis : %d.%ds",format.seconds,format.milliseconds) ; 
+    }
+    else{
+        mvwprintw(afterGameBox,1,1,"DEFAITE") ; 
+        mvwprintw(afterGameBox,1,1,"Le robot n'à pas résolue le jeu") ;
+    }
+
+    wrefresh(afterGameBox) ;
+    while (1)
+    { // Attend un input avant de fermer le jeu
+
+        userInput = getch() ;
+        if(userInput != -1 ) { // Quand échap est pressé, termine le jeu (features debug)
+            break;
+        }
+    }
+}

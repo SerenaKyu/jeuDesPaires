@@ -14,5 +14,6 @@ void affichage_scores(struct score *classement, WINDOW *myWindow);
 void ecriture_scores(struct score *classement, FILE *fichier_score);
 void gestion_classement(int time, WINDOW *myWindow, bool victory);
 void after_game(bool victory, int time);
+void after_game_autoplay(bool victoiry,int time) ;
 
 #endif  // AFTERGAME_H

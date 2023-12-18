@@ -376,4 +376,74 @@ void game_1player(bool debugMode) { // Fonction du jeu à 1 joueur
         checkPaires(cardDeck,start_time,current_time,chronoBox) ; // Vérifie si deux cartes sont sélectionnées et paires
     } while ((inGameTime / 1000) < 120 && forfait != true && victory != true); // Tant que le joueur n'a pas réussi, abandonné, ou atteint la limite de temps de 120 secondes, on continue le sélection de cartes
     after_game(victory,inGameTime) ; // Lance la fenêtre d'après jeu
-    }
+}
+
+/*
+Fonction : game_autoplay
+Traitement : Joue le jeu en mode autoplay
+*/
+void game_autoplay() { // Fonction du jeu à 1 joueur
+
+    struct timeval start_time, current_time; // Structure de temps en time.h
+    playcard cardDeck[12] ; // Définition du paquet de carte
+
+    int userInput; // Variable pour les inputs joueur (dans ce cass, quitter le mode autoplay)
+    int inGameTime ; // Temps passé dans le jeu, récupéré dans la fonction de calcul de temps
+    int botCard ;// Défini la postion du robot dans les cartes 
+    bool victory = false ; // Condition de victoire, ici mit en true par défaut pour debug le programme 
+    bool forfait = false ;
+
+
+
+    WINDOW *tipToolBox = newwin(4,70,0,0) ; // Fenêtre du toolTip du jeu
+    WINDOW *chronoBox = newwin(4,29,0,71) ; // Fenêtre du chrono du jeu
+    
+    box(tipToolBox,0,0) ; // Affichage des deux fenêtre en mode box
+    box(chronoBox,0,0) ; 
+    start_color(); // Initialise la couleur
+    noecho() ; // Enlève l'affichage des inputs entrés par l'utilisateur
+    curs_set(0); // Enlève le curseur de la fenêtre du terminal
+    timeout(100) ; // Intilise l'intervalle de temps entre chaque rafraîchissement du programme (utile pour le timer)
+
+    init_pair(1, COLOR_WHITE, COLOR_BLACK); // Initialise les paires de couleur
+    init_pair(2, COLOR_GREEN, COLOR_BLACK); // Initialise la paire de couleur verte
+    init_pair(3, COLOR_CYAN, COLOR_BLACK); // Initialise la paire de couleur cyan
+
+    affiche_tipTool(tipToolBox) ; // Affiche la description 
+    wrefresh(tipToolBox) ; // Refresh les deux fenêtres
+    wrefresh(chronoBox) ;
+
+    srand(time(NULL)) ;
+
+    printCard(cardDeck,false) ; // Affiche toutes les cartes en mode face cachée
+
+    gettimeofday(&start_time, NULL) ; // Récupère la valeur de début du chrono et du jeu
+
+     do { // Lancement du jeu et du chrono
+        if(numberOfPairs == 12) {
+            victory = true;
+        }
+
+        gettimeofday(&current_time, NULL) ; // Récupère la valeur au moment où se trouve le timer
+
+        inGameTime = affichage_temps(start_time,current_time,chronoBox); // Refresh le temps actuel du jeu tout en la conservant pour pouvoir l'utiliser pour savoir si on est hors temps ou non
+
+        userInput = getch(); // Récupère l'input utilisateur pour commander le jeu
+
+        botCard = rand() % 16 ;
+        while(cardDeck[botCard].paired == true) { // Décale la position si la carte est paire
+            botCard ++;
+        }
+        botCard = checkPose(botCard,cardDeck); // Recalcule la position pour éviter que le joueur sorte de l'écran
+        if(cardDeck[botCard].paired == false) { // Permet de ne pas sélectionner une carte déjà pairée
+            cardDeck[botCard].selected = true ;
+        }
+
+        if(userInput == 'q') {
+            break;
+        }
+        cardStatusUpdate(cardDeck,botCard,false); // Update le status des cartes (couleur)
+        checkPaires(cardDeck,start_time,current_time,chronoBox) ; // Vérifie si deux cartes sont sélectionnées et paires
+    } while ((inGameTime / 1000) < 120 && forfait != true && victory != true); // Tant que le joueur n'a pas réussi, abandonné, ou atteint la limite de temps de 120 secondes, on continue le sélection de cartes
+    after_game_autoplay(victory,inGameTime) ; // Lance la fenêtre d'après jeu
+} 
