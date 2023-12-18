@@ -95,7 +95,7 @@ void menuDebug() {
         case '1' :
             wclear(debugBox) ; //eneleve l'affichage de l'ecran titre
             wrefresh(debugBox) ; //refresh aprés l'avoir enlever pour pouvoir la mettre a jour
-
+        
             game_1player(true) ;
             break;
         case '2' :
