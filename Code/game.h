@@ -32,5 +32,6 @@ void cardStatusUpdate(playcard *chosenCard, int userPosition, bool debugMode);
 void checkPaires(playcard *chosenCard, struct timeval start_time, struct timeval current_time, WINDOW *myWindow);
 int checkPose(int pose, playcard *chosenCard);
 void game_1player(bool debugMode);
+void game_autoplay() ;
 
 #endif  //GAME_H

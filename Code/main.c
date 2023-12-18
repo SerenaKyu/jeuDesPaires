@@ -55,7 +55,10 @@ int main() {
         game_1player(false) ; // Début du jeu à 1 joueur
         break;
     case '2' : // Autoplay
-        mvwprintw(menuBox,17,4,"Mode AutoPlay") ;
+        wclear(menuBox) ; // Enlève l'affichage de l'écran titre
+        wrefresh(menuBox) ; // Refresh après l'avoir enlevé pour pouvoir la mettre à jour
+
+        game_autoplay() ; // Début du en Mode autoplay
         break ; 
     case '3'  :
         wclear(menuBox) ; // Enlève l'affichage de l'écran titre
