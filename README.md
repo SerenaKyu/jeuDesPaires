@@ -12,7 +12,7 @@ Le programme est disponible sur n'importe quelle distribution **Linux. :penguin:
 
 ##### 1. Installer la librairie ncurses sur votre machine :blue_book: 
 
-- Ce programme fonctionne grâce à la librairie ncurses, il faut donc la télécharger au préalable (:page_facing_up:[Fiche d'aide sur l'installation de la librairie ncurses pour les distributions les plus populaires](https://www.cyberciti.biz/faq/linux-install-ncurses-library-headers-on-debian-ubuntu-centos-fedora/?__cf_chl_tk=rluPuC6Rq0fQWuxExTTKQpOTJpms0k3zLRHfU842vQY-1700225221-0-gaNycGzNDqU))
+- Ce programme fonctionne grâce à la librairie ncurses, il faut donc la télécharger au préalable ( :page_facing_up: [Fiche d'aide sur l'installation de la librairie ncurses pour les distributions les plus populaires](https://www.cyberciti.biz/faq/linux-install-ncurses-library-headers-on-debian-ubuntu-centos-fedora/?__cf_chl_tk=rluPuC6Rq0fQWuxExTTKQpOTJpms0k3zLRHfU842vQY-1700225221-0-gaNycGzNDqU))
 
 ##### 2. Télécharger les fichiers sources du programme sur votre ordinateur :floppy_disk: 
 
@@ -21,7 +21,7 @@ Le programme est disponible sur n'importe quelle distribution **Linux. :penguin:
 
 ##### 3. Compiler le code et le lancer dans le terminal :minidisc:
 
-- Pour compiler le code, verifiez que vous possédez GCC GNU sur votre machine (:arrow_down:[Lien pour installer GCC GNU](https://doc.ubuntu-fr.org/gcc))
+- Pour compiler le code, verifiez que vous possédez GCC GNU sur votre machine ( :arrow_down: [Lien pour installer GCC GNU](https://doc.ubuntu-fr.org/gcc))
 
 - Pour compiler le code de manière simple et lancer le jeu il faut :
 
