@@ -16,7 +16,7 @@ Le programme est disponible sur n'importe quelle distribution **Linux. :penguin:
 
 ##### 2. Télécharger les fichiers sources du programme sur votre ordinateur :floppy_disk: 
 
-- Cloner le repository (:page_facing_up:[Fiche d'aide pour cloner un repository](https://docs.github.com/fr/repositories/creating-and-managing-repositories/cloning-a-repository))
+- Cloner le repository ( :page_facing_up: [Fiche d'aide pour cloner un repository](https://docs.github.com/fr/repositories/creating-and-managing-repositories/cloning-a-repository))
 - Ou téléchargez-le manuellement en haut de la page avec le boutton vert "Code"
 
 ##### 3. Compiler le code et le lancer dans le terminal :minidisc:
