@@ -520,7 +520,7 @@ void game_autoplay() { // Fonction du jeu à 1 joueur
 
         userInput = getch(); // Récupère l'input utilisateur pour commander le jeu
 
-        botPosition = rand() % 16 ; //recupere un nombre aleatoire entre 0 et 15 
+        botPosition = rand() % 12 ; //recupere un nombre aleatoire entre 0 et 15 
         while(cardDeck[botPosition].paired == true) { // Décale la position si la carte est paire
             botPosition ++;
         }
