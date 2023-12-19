@@ -41,7 +41,7 @@ Traitement : Affiche tous les modes de jeu qu'il est possible de séléctionner 
 void affiche_option(WINDOW * myWindow) { // Permet d'afficher les options disponibles
 
     int ligne = NOMBRE_LIGNE_TITRE + 2 ; // Permet d'initialiser la ligne de départ du tableau de l'affichage de chaque paramètre du tableau
-    const char *option[NOMBRE_OPTION] = {"Menu","1. 1 Joueur","2. Autoplayer","3. Mode debug","Entrer l'option de votre de choix :"} ;
+    const char *option[NOMBRE_OPTION] = {"Menu","1. 1 Joueur","2. Autoplayer","3. Réglage","Entrer l'option de votre de choix :"} ;
 
     for(int i = 0 ; i < NOMBRE_OPTION ; i++) {
         mvwprintw(myWindow,ligne + i,4,"%s",option[i]) ;

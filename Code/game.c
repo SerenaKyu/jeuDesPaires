@@ -175,7 +175,7 @@ Traitement : Permet de créer l'ensemble des cartes du jeu en mettant les symbol
 */
 void definitionCard(playcard *carte) { // Va définir les valeurs de la liste des cartes (leur position, leur valeur et leur status)
 
-    int position_x[6] = {1,11,21,31,41,51} ; // Position x de la carte, il y a une liste pour les cartes d'une rangée
+    int position_x[6] = {20,30,40,50,60,70} ; // Position x de la carte, il y a une liste pour les cartes d'une rangée
     int position_y = 5; //position y de la carte, la premiere rangee commence en 5
     int valeurRand, temp ; //definition des valeur utiliser pour l'algo de trie aleatoire
     int cardValue[12] = {'A','A','B','B','C','C','D','D','E','E','F','F'} ; //definition de toutes les valeur utiliser pour les cartes 
