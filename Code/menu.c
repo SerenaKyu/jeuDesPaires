@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 #include "game.h"
+#include "main.h"
 
 #define NOMBRE_LIGNE_TITRE 7
 #define NOMBRE_OPTION 5
@@ -59,7 +60,8 @@ void reset_score() {
     highscore = fopen("../../Data/jeuhighscore.txt", "w");
 
     if(highscore == NULL){ // Vérifie si le fichier jeuhighscore.txt a bien été ouvert
-        printf("Erreur lors de l'écriture du fichiers des scores");
+        endwin() ;
+        printf("Erreur 16 : lors de l'écriture du fichiers des scores");
         exit(2);
     } 
 
@@ -68,9 +70,6 @@ void reset_score() {
     fprintf(highscore, "3 ZACK 110.0\n") ;
 
     fclose(highscore);
-    
-    endwin() ;
-    fprintf(stderr,"Fichier des scores réinitialisé par défaut\n") ;
 }
 
 /*
@@ -126,6 +125,10 @@ void menuDebug() {
             break;
         case '2' :
             reset_score() ;
+            wclear(debugBox) ;
+            wrefresh(debugBox) ;
+
+            main() ;
             break ;
         default :
             break;
