@@ -79,15 +79,88 @@ int debug_input(int input, int lastInput,WINDOW *myWindow) {  // Affiche l'input
 }
 
 /*
+Fonction : motifCard
+Param : ChosenCard est la carte selectionner
+Traitement : il affiche le motif de la carte selon sa valeur
+*/
+void motifCard(playcard chosenCard){
+
+    switch (chosenCard.value)
+    {
+    case 'A':
+
+        wattron(chosenCard.windowCard,COLOR_PAIR(4));
+        mvwprintw(chosenCard.windowCard,1,2,"     ");
+        mvwprintw(chosenCard.windowCard,2,2,"     ");
+        mvwprintw(chosenCard.windowCard,3,2,"     ");
+        mvwprintw(chosenCard.windowCard,4,2,"     ");
+        mvwprintw(chosenCard.windowCard,5,2,"     ");
+        wattroff(chosenCard.windowCard,COLOR_PAIR(4));
+        break;
+    
+    case 'B' :
+        wattron(chosenCard.windowCard,COLOR_PAIR(5));
+        mvwprintw(chosenCard.windowCard,1,5," ");
+        mvwprintw(chosenCard.windowCard,1,3," ");
+        mvwprintw(chosenCard.windowCard,3,2,"     ");
+        mvwprintw(chosenCard.windowCard,2,2,"     ");
+        mvwprintw(chosenCard.windowCard,4,3,"   ");
+        mvwprintw(chosenCard.windowCard,5,4," ");
+        wattron(chosenCard.windowCard,COLOR_PAIR(5));
+        break;
+    case 'C' :
+        wattron(chosenCard.windowCard,COLOR_PAIR(6));
+        mvwprintw(chosenCard.windowCard,1,4," ");
+        mvwprintw(chosenCard.windowCard,2,3,"   ");
+        mvwprintw(chosenCard.windowCard,3,2,"     ");
+        mvwprintw(chosenCard.windowCard,4,3,"   ");
+        mvwprintw(chosenCard.windowCard,5,4," ");
+        wattroff(chosenCard.windowCard,COLOR_PAIR(5));
+        break;
+    case 'D' :
+        wattron(chosenCard.windowCard,COLOR_PAIR(7));
+        mvwprintw(chosenCard.windowCard,1,2,"   ");
+        mvwprintw(chosenCard.windowCard,2,2,"    ");
+        mvwprintw(chosenCard.windowCard,3,2,"     ");
+        mvwprintw(chosenCard.windowCard,4,3,"    ");
+        mvwprintw(chosenCard.windowCard,5,4,"   ");
+        wattroff(chosenCard.windowCard,COLOR_PAIR(7));
+        break;
+    case 'E' :
+        wattron(chosenCard.windowCard,COLOR_PAIR(8));
+        mvwprintw(chosenCard.windowCard,1,4," ");
+        mvwprintw(chosenCard.windowCard,2,3,"   ");
+        mvwprintw(chosenCard.windowCard,3,3,"   ");
+        mvwprintw(chosenCard.windowCard,4,2,"     ");
+        mvwprintw(chosenCard.windowCard,5,2,"     ");
+        wattroff(chosenCard.windowCard,COLOR_PAIR(8));
+        break;
+    case 'F' :
+        wattron(chosenCard.windowCard,COLOR_PAIR(9));
+        mvwprintw(chosenCard.windowCard,1,3,"   ");
+        mvwprintw(chosenCard.windowCard,2,2,"     ");
+        mvwprintw(chosenCard.windowCard,3,2,"     ");
+        mvwprintw(chosenCard.windowCard,4,2,"     ");
+        mvwprintw(chosenCard.windowCard,5,3,"   ");
+        wattroff(chosenCard.windowCard,COLOR_PAIR(9));
+        break;
+
+    default:
+        break;
+    }
+}
+
+/*
 Fonction : hiddenCard
 Param : chosenCard correspond à la carte choisie par l'utilisateur, et debugMode permet de dire si oui ou non le mode debug est activé
 Traitement : Cette fonction permet de créer les cartes face cachée, et d'afficher la valeur se trouvant sur l'autre coté de la carte si le mode debug est activé
 */
 void hiddenCard(playcard chosenCard , bool debugMode) { // Affiche une carte face cachée. Si le mode debug est activé, on affiche également la lettre
+    werase(chosenCard.windowCard) ;
     wattron(chosenCard.windowCard,COLOR_PAIR(1)) ; // Défini la couleur de la carte
     wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ; // Créé les bordure de la carte
     if(debugMode == true) { // Si le mode debug est activé, affiche la valeur
-        mvwprintw(chosenCard.windowCard,3,4,"%c",chosenCard.value) ;
+        motifCard(chosenCard) ;
     }
     else{
         mvwprintw(chosenCard.windowCard,3,4," ") ; // Sinon, n'affiche rien
@@ -147,10 +220,11 @@ Param : chosenCard correspond à la carte sur laquelle le joueur se trouve, debu
 Traitement : Permet au joueur de sélectionner une carte et de la mettre en verte lorsque c'est le cas
 */
 void onCard(playcard chosenCard,bool debugMode) { // Si le joueur est sur la carte, celle-ci devient verte
+    werase(chosenCard.windowCard) ;
     wattron(chosenCard.windowCard,COLOR_PAIR(2)) ;
     wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;
     if(debugMode == true) { // Si le mode debug est activé, affiche la valeur de la carte
-        mvwprintw(chosenCard.windowCard,3,4,"%c",chosenCard.value) ;
+        motifCard(chosenCard) ;
     }
     else{
         mvwprintw(chosenCard.windowCard,3,4," ") ; // Sinon, cela n'affiche rien
@@ -164,9 +238,10 @@ Param : chosenCard correspond à la carte sur laquelle la fonction va s'applique
 Traitement : Permet de changer les coins de la carte avec des 0 lorsque celle-ci est pairée.
 */
 void pairedCard(playcard chosenCard) { // Si elle est pairée, les coins de la carte sont des 0
+    werase(chosenCard.windowCard);
     wattron(chosenCard.windowCard,COLOR_PAIR(1)) ;
     wborder(chosenCard.windowCard,'|','|','-','-','0','0','0','0') ;
-    mvwprintw(chosenCard.windowCard,3,4,"%c",chosenCard.value) ;
+    motifCard(chosenCard) ;
     wrefresh(chosenCard.windowCard) ;
 }
 
@@ -176,9 +251,10 @@ Param : chosenCard correspond à la carte sur laquelle la fonction va s'applique
 Traitement : Permet au joueur de sélectionner une carte et ainsi d'afficher sa valeur
 */
 void selectedCard(playcard chosenCard){ // Si la carte est sélectionnée, elle devient bleu et on affiche sa valeur
+    werase(chosenCard.windowCard) ;
     wattron(chosenCard.windowCard,COLOR_PAIR(3)) ;
     wborder(chosenCard.windowCard,'|','|','-','-',' ',' ',' ',' ') ;    
-    mvwprintw(chosenCard.windowCard,3,4,"%c",chosenCard.value) ;
+    motifCard(chosenCard) ;
     wrefresh(chosenCard.windowCard) ;
 }   
 
@@ -324,6 +400,13 @@ void game_1player(bool debugMode) { // Fonction du jeu à 1 joueur
     init_pair(2, COLOR_GREEN, COLOR_BLACK); // Initialise la paire de couleur verte
     init_pair(3, COLOR_CYAN, COLOR_BLACK); // Initialise la paire de couleur cyan
 
+    init_pair(4, COLOR_BLACK, COLOR_BLUE);
+    init_pair(5, COLOR_BLACK, COLOR_RED);
+    init_pair(6, COLOR_BLACK, COLOR_YELLOW);
+    init_pair(7, COLOR_BLACK, COLOR_GREEN);
+    init_pair(8, COLOR_BLACK, COLOR_CYAN);
+    init_pair(9, COLOR_BLACK, COLOR_MAGENTA);
+
     affiche_tipTool(tipToolBox) ; // Affiche la description 
     wrefresh(tipToolBox) ; // Refresh les deux fenêtres
     wrefresh(chronoBox) ;
@@ -408,6 +491,13 @@ void game_autoplay() { // Fonction du jeu à 1 joueur
     init_pair(1, COLOR_WHITE, COLOR_BLACK); // Initialise les paires de couleur
     init_pair(2, COLOR_GREEN, COLOR_BLACK); // Initialise la paire de couleur verte
     init_pair(3, COLOR_CYAN, COLOR_BLACK); // Initialise la paire de couleur cyan
+
+    init_pair(4, COLOR_BLACK, COLOR_BLUE);
+    init_pair(5, COLOR_BLACK, COLOR_RED);
+    init_pair(6, COLOR_BLACK, COLOR_YELLOW);
+    init_pair(7, COLOR_BLACK, COLOR_GREEN);
+    init_pair(8, COLOR_BLACK, COLOR_CYAN);
+    init_pair(9, COLOR_BLACK, COLOR_MAGENTA);
 
     affiche_tipTool(tipToolBox) ; // Affiche la description 
     wrefresh(tipToolBox) ; // Refresh les deux fenêtres
