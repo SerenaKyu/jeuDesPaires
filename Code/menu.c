@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 #include "game.h"
+#include "main.h"
 
 #define NOMBRE_LIGNE_TITRE 7
 #define NOMBRE_OPTION 5
@@ -40,7 +41,7 @@ Traitement : Affiche tous les modes de jeu qu'il est possible de séléctionner 
 void affiche_option(WINDOW * myWindow) { // Permet d'afficher les options disponibles
 
     int ligne = NOMBRE_LIGNE_TITRE + 2 ; // Permet d'initialiser la ligne de départ du tableau de l'affichage de chaque paramètre du tableau
-    const char *option[NOMBRE_OPTION] = {"Menu","1. 1 Joueur","2. Autoplayer","3. Mode debug","Entrer l'option de votre de choix :"} ;
+    const char *option[NOMBRE_OPTION] = {"Menu","1. 1 Joueur","2. Autoplayer","3. Réglage","Entrer l'option de votre de choix :"} ;
 
     for(int i = 0 ; i < NOMBRE_OPTION ; i++) {
         mvwprintw(myWindow,ligne + i,4,"%s",option[i]) ;
@@ -59,7 +60,8 @@ void reset_score() {
     highscore = fopen("../../Data/jeuhighscore.txt", "w");
 
     if(highscore == NULL){ // Vérifie si le fichier jeuhighscore.txt a bien été ouvert
-        printf("Erreur lors de l'écriture du fichiers des scores");
+        endwin() ;
+        printf("Erreur 16 : lors de l'écriture du fichiers des scores");
         exit(2);
     } 
 
@@ -68,9 +70,6 @@ void reset_score() {
     fprintf(highscore, "3 ZACK 110.0\n") ;
 
     fclose(highscore);
-    
-    endwin() ;
-    fprintf(stderr,"Fichier des scores réinitialisé par défaut\n") ;
 }
 
 /*
@@ -126,6 +125,10 @@ void menuDebug() {
             break;
         case '2' :
             reset_score() ;
+            wclear(debugBox) ;
+            wrefresh(debugBox) ;
+
+            main() ;
             break ;
         default :
             break;

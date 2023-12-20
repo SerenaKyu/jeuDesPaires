@@ -25,6 +25,11 @@ int main() {
     char userGamemodeChoice[TAILLE_T]; // Chaîne de caractères qui permet de récupérer le choix de mode de l'utilisateur
 
     WINDOW *menuBox = newwin(height,width,start_y,start_x) ; // Définition de la taille de la fenêtre 
+    if(menuBox == NULL) {
+        endwin() ;
+        fprintf(stderr,"Erreur 15 : Chargement des ressources ncurses impossible") ;
+        return 0;
+    }
 
     nodelay(stdscr,TRUE); // N'attend pas pour effectuer un while
     getmaxyx(stdscr, rows, cols); // Récupere la taille du terminal
