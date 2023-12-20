@@ -148,7 +148,7 @@ void after_game(bool victory, int time){
     if (victory == true) { // Si le joueur a gagné 
 
         mvwprintw(afterGameBox,1,1,"VICTOIRE") ; // 
-        mvwprintw(afterGameBox,2,1,"Votre Temps : %d.%ds",format.seconds,format.milliseconds) ;
+        mvwprintw(afterGameBox,2,1,"Votre temps : %d.%ds",format.seconds,format.milliseconds) ;
         
         gestion_classement(time,afterGameBox,victory) ;
     }
@@ -183,11 +183,11 @@ void after_game_autoplay(bool victory,int time){
 
     if(victory == true) {
         mvwprintw(afterGameBox,1,1,"VICTOIRE") ; 
-        mvwprintw(afterGameBox,2,1,"Le robot à mis : %d.%ds",format.seconds,format.milliseconds) ; 
+        mvwprintw(afterGameBox,2,1,"Le robot a mis : %d.%ds",format.seconds,format.milliseconds) ; 
     }
     else{
-        mvwprintw(afterGameBox,1,1,"DEFAITE") ; 
-        mvwprintw(afterGameBox,1,1,"Le robot n'à pas résolue le jeu") ;
+        mvwprintw(afterGameBox,1,1,"DÉFAITE") ; 
+        mvwprintw(afterGameBox,1,1,"Le robot n'a pas résolu le jeu") ;
     }
 
     wrefresh(afterGameBox) ;

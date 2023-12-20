@@ -1,6 +1,14 @@
 - ### PatchNotes :bookmark_tabs:
 
-*Version actuelle du jeu : v1.1*
+*Version actuelle du jeu : v1.2*
+
+- ##### v1.2 :
+> - Implémentation des features suivantes :
+>   - Motif de couleur
+>   - Erreur si les ressources ncurses ne sont pas load
+>   - Les cartes sont désormais centrée par rapport à la fenetre
+>   - Retour au menu après le reset des scores.
+> - Correction d'un bug qui rendait le robot moins aléatoire
 
 - ##### v1.1 :
 > - Implémentation des features suivantes :

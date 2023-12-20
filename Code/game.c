@@ -85,9 +85,9 @@ Traitement : il affiche le motif de la carte selon sa valeur
 */
 void motifCard(playcard chosenCard){
 
-    switch (chosenCard.value)
+    switch (chosenCard.value) //récupere la valeur de la carte
     {
-    case 'A':
+    case 'A': //carré bleu
 
         wattron(chosenCard.windowCard,COLOR_PAIR(4));
         mvwprintw(chosenCard.windowCard,1,2,"     ");
@@ -98,7 +98,7 @@ void motifCard(playcard chosenCard){
         wattroff(chosenCard.windowCard,COLOR_PAIR(4));
         break;
     
-    case 'B' :
+    case 'B' : //coeur rouge
         wattron(chosenCard.windowCard,COLOR_PAIR(5));
         mvwprintw(chosenCard.windowCard,1,5," ");
         mvwprintw(chosenCard.windowCard,1,3," ");
@@ -108,7 +108,7 @@ void motifCard(playcard chosenCard){
         mvwprintw(chosenCard.windowCard,5,4," ");
         wattron(chosenCard.windowCard,COLOR_PAIR(5));
         break;
-    case 'C' :
+    case 'C' : //Losange jaune
         wattron(chosenCard.windowCard,COLOR_PAIR(6));
         mvwprintw(chosenCard.windowCard,1,4," ");
         mvwprintw(chosenCard.windowCard,2,3,"   ");
@@ -117,7 +117,7 @@ void motifCard(playcard chosenCard){
         mvwprintw(chosenCard.windowCard,5,4," ");
         wattroff(chosenCard.windowCard,COLOR_PAIR(5));
         break;
-    case 'D' :
+    case 'D' : //Forme bizarre vert
         wattron(chosenCard.windowCard,COLOR_PAIR(7));
         mvwprintw(chosenCard.windowCard,1,2,"   ");
         mvwprintw(chosenCard.windowCard,2,2,"    ");
@@ -126,7 +126,7 @@ void motifCard(playcard chosenCard){
         mvwprintw(chosenCard.windowCard,5,4,"   ");
         wattroff(chosenCard.windowCard,COLOR_PAIR(7));
         break;
-    case 'E' :
+    case 'E' : //triangle cyan
         wattron(chosenCard.windowCard,COLOR_PAIR(8));
         mvwprintw(chosenCard.windowCard,1,4," ");
         mvwprintw(chosenCard.windowCard,2,3,"   ");
@@ -135,7 +135,7 @@ void motifCard(playcard chosenCard){
         mvwprintw(chosenCard.windowCard,5,2,"     ");
         wattroff(chosenCard.windowCard,COLOR_PAIR(8));
         break;
-    case 'F' :
+    case 'F' : //carré a bord arrondi violet
         wattron(chosenCard.windowCard,COLOR_PAIR(9));
         mvwprintw(chosenCard.windowCard,1,3,"   ");
         mvwprintw(chosenCard.windowCard,2,2,"     ");
@@ -143,9 +143,6 @@ void motifCard(playcard chosenCard){
         mvwprintw(chosenCard.windowCard,4,2,"     ");
         mvwprintw(chosenCard.windowCard,5,3,"   ");
         wattroff(chosenCard.windowCard,COLOR_PAIR(9));
-        break;
-
-    default:
         break;
     }
 }
@@ -492,6 +489,7 @@ void game_autoplay() { // Fonction du jeu à 1 joueur
     init_pair(2, COLOR_GREEN, COLOR_BLACK); // Initialise la paire de couleur verte
     init_pair(3, COLOR_CYAN, COLOR_BLACK); // Initialise la paire de couleur cyan
 
+    //Initialisation des couleurs pour les motif 
     init_pair(4, COLOR_BLACK, COLOR_BLUE);
     init_pair(5, COLOR_BLACK, COLOR_RED);
     init_pair(6, COLOR_BLACK, COLOR_YELLOW);

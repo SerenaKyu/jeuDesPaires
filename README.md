@@ -4,6 +4,12 @@
 
  Le jeu des paires est un jeu de cartes où le but est de former le plus rapidement possible des ensembles de cartes identiques, soyez le plus rapide pour trouver tous les pairs afin de pouvoir inscrire le meilleur score ! 
 
+*Menu du jeu*
+![Image du menu](./Img/menu.png)
+
+*Gameplay du jeu*
+![Image du jeu](./Img/game.png)
+
 ---
 
  - ### Installation, Compilation & OS disponible :arrow_down:
@@ -53,7 +59,7 @@ gcc -c game.exe ../../Code/ObjectFile/main.c ../../Code/ObjectFile/menu.c ../../
 
 Voici notre avancement actuel sur le projet, ce qui reste à faire et à implémenter
 
-*Version actuelle du jeu : v1.1*
+*Version actuelle du jeu : v1.2*
 
 > **Légende :**
 >
@@ -78,6 +84,7 @@ Voici notre avancement actuel sur le projet, ce qui reste à faire et à implém
 |Highscores stockage       |:white_check_mark:        |**v0.4**|
 |Temps écoulé              |:white_check_mark:        |**v0.2**|
 |Décision AutoPlay         |:white_check_mark:        |**v1.1**|
+|Motif de carte            |:white_check_mark:        |**v1.2**|
 |Site Web                  |:x:                       |        |
 |Portage Windows           |:x:                       |        |
 
@@ -89,7 +96,10 @@ Accédez à tous les patchnotes :page_facing_up:[Liste complète](./PATCH.md)
 
 **Dernier Patch :**
 
-- ##### v1.1 :
+- ##### v1.2 :
 > - Implémentation des features suivantes :
->   - mode autoplay
-> - Correction d'un bug graphique mineur
+>   - Motif de couleur
+>   - Erreur si les ressources ncurses ne sont pas load
+>   - Les cartes sont désormais centrée par rapport à la fenetre
+>   - Retour au menu après le reset des scores.
+> - Correction d'un bug qui rendait le robot moins aléatoire
