@@ -1,7 +1,7 @@
 #ifndef AFTERGAME_H
 #define AFTERGAME_H
 
-#include <ncurses.h>
+#include <curses.h>
 #include <stdbool.h>
 
 struct score {

@@ -1,17 +1,17 @@
-game.exe : ../../Code/ObjectFile/main.o ../../Code/ObjectFile/menu.o ../../Code/ObjectFile/game.o ../../Code/ObjectFile/aftergame.o
-	gcc -o game.exe ../../Code/ObjectFile/main.o ../../Code/ObjectFile/menu.o ../../Code/ObjectFile/game.o ../../Code/ObjectFile/aftergame.o -lncurses
+game.exe : ../../Code-Win/ObjectFile/main.o ../../Code-Win/ObjectFile/menu.o ../../Code-Win/ObjectFile/game.o ../../Code-Win/ObjectFile/aftergame.o ./pdcurses.dll
+	gcc -o game.exe ../../Code-Win/ObjectFile/main.o ../../Code-Win/ObjectFile/menu.o ../../Code-Win/ObjectFile/game.o ../../Code-Win/ObjectFile/aftergame.o -L. -l:pdcurses.dll
 
-../../Code/ObjectFile/main.o : ../../Code/main.c
-	gcc -c -Wall ../../Code/main.c -o ../../Code/ObjectFile/main.o
+../../Code-Win/ObjectFile/main.o : ../../Code-Win/main.c
+	gcc -c -Wall ../../Code-Win/main.c -o ../../Code-Win/ObjectFile/main.o
 
-../../Code/ObjectFile/menu.o : ../../Code/menu.c
-	gcc -c -Wall ../../Code/menu.c -o ../../Code/ObjectFile/menu.o
+../../Code-Win/ObjectFile/menu.o : ../../Code-Win/menu.c
+	gcc -c -Wall ../../Code-Win/menu.c -o ../../Code-Win/ObjectFile/menu.o
 
-../../Code/ObjectFile/aftergame.o : ../../Code/aftergame.c
-	gcc -c -Wall ../../Code/aftergame.c -o ../../Code/ObjectFile/aftergame.o
+../../Code-Win/ObjectFile/aftergame.o : ../../Code-Win/aftergame.c
+	gcc -c -Wall ../../Code-Win/aftergame.c -o ../../Code-Win/ObjectFile/aftergame.o
 
-../../Code/ObjectFile/game.o : ../../Code/game.c
-	gcc -c -Wall ../../Code/game.c -o ../../Code/ObjectFile/game.o
+../../Code-Win/ObjectFile/game.o : ../../Code-Win/game.c
+	gcc -c -Wall ../../Code-Win/game.c -o ../../Code-Win/ObjectFile/game.o
 
 clean :
-	rm -f ../../Code/ObjectFile/main.o ../../Code/ObjectFile/menu.o ../../Code/ObjectFile/game.o ../../Code/ObjectFile/aftergame.o game.exe
+	rm -f ../../Code-Win/ObjectFile/main.o ../../Code-Win/ObjectFile/menu.o ../../Code-Win/ObjectFile/game.o ../../Code-Win/ObjectFile/aftergame.o game.exe

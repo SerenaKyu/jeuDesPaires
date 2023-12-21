@@ -1,4 +1,4 @@
-#include <ncurses.h> // stdio.h est inclue dans ncurses.h
+#include <curses.h> // stdio.h est inclue dans ncurses.h
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
